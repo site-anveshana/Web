@@ -55,9 +55,8 @@ tr:nth-child(even) {
 <body>
 
 <form class="  well form-horizontal"  name="form2" action="anveshana_reg_com.php" method="post"  id="contact_form" onsubmit="return validate()">
- 
- <table >
-      	
+<div class="form-group">
+<div class="row" id="content0">
 		
 <?php
 session_start();
@@ -73,7 +72,10 @@ $dbobj->connect();
 //query
 $result = $dbobj->search('anveshana_events','*',1,1);
 
-if($result){ 
+if($result){
+    $count = 0;
+    $x = 0;
+    $a = 0;
     while($row = $result->fetch_assoc()){
 
         echo "<script>";
@@ -84,29 +86,35 @@ if($result){
             echo "else{";
                 echo "var x = document.createElement('table');";
                 echo "x.id='".$row['event_type']."';";
-                echo "document.forms['form2'].appendChild(x);";
-                echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr>    <td colspan="6" ><h4 style="color:red; font-weight: bold"></h4></td> '.$row['event_type'].' EVENTS	</tr class="checkbox-grid">\';';
+                echo "x.className ='col-lg-4 col-sm-6 col-md-12';";
+                if($dept != $row['event_type']){
+                    if($row['event_type'] != 'CENTRAL' && $row['event_type'] != 'CULTURAL' && $row['event_type'] != 'SPORTS'){
+                        echo "x.style='display:none;';";
+                        $x = 1;
+                    }
+                }
+                echo "document.getElementById('content".$a."').appendChild(x);";
+                echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr>    <td colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></td></tr class="checkbox-grid">\';';
                 echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>\';';
             echo "}";
 
         echo "</script>";
+        if($x == 1){
+            $count += 1;
+            if ($count%3 == 0){
+                echo "</div>";
+                $a += 1;
+                echo "<div class='row' id='content".$a."'>";
+            }
+            $x = 0;
+        }
 
         // $event_details .= '<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>';
     }
 }
 
 ?>
-
-
-    <div class="form-group"> 
-
-      <label class="col-md-4 control-label"> Events<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>
-
-        </div>
-			
-	</div>
-
-</table>
+</div>
 <!-- Register  Button -->
       <div class="form-group">
         <label class="col-md-4    control-label"></label>
@@ -114,6 +122,7 @@ if($result){
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-warning" >  &nbsp;
           REGISTER  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
+</form>
      
 </body>
 </html>

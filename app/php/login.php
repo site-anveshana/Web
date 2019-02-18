@@ -7,8 +7,8 @@
 
     $dbobj->connect();
 
-    $result = $dbobj->search('anveshana_users',"*",'username','upper("'.$user.'")');
-    
+    $result = $dbobj->search('anveshana_users',"*",'username','upper("'.$user.'") or username like lower("'.$user.'")');
+
     if($result){
         if (mysqli_num_rows($result) > 0)
         // output data of each row
@@ -21,11 +21,18 @@
 
                 
                 $_SESSION['anveshana_role'] = $row['role_id'];
-                echo "<script>sessionStorage.setItem('anveshana_role','".$row['role_id']."')</script>";
-
+                echo "<script>sessionStorage.setItem('anveshana_role','".$row['role_id']."');</script>";
+                
                 header("Location: ../home.php");
             }
+            else{
+                echo '<img src="../img/wrong.png" alt="" width="70%">';
+                header( "refresh:2;url=../index.html" );
+
+            }
         }
+        else
+            header( "refresh:2;url=../index.html" );
     } else {
         echo '<img src="../img/wrong.png" alt="" width="70%">';
         header( "refresh:2;url=../index.html" );

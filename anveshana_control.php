@@ -4,7 +4,7 @@
 
 	ob_start();
 
-	include_once("db_operations.php");
+	include_once("DBConnect.php");
 
 	$htno = $_POST['htno'];
 
@@ -51,12 +51,13 @@
 
 	$dbc->connect();
 
-	$sql = "INSERT INTO anveshana_participants (HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )
+	$sql = "INSERT INTO participants (HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )
 
 	                 VALUES ('$htno' ,'$fname', '$lname' , '$gender' , '$course' , '$department' , '$year' , '$college' ,'$email' ,'$mobile' )";
 
 
-		$data = $dbc->sqlQury($sql);
+
+		$data = $dbc->insert($sql);
 
 		
 
@@ -66,7 +67,7 @@
 
 		    //echo "<script>alert(\"REGISTERED SUCCESFULLY\")</script>";
 
-			// header("refresh:0;url=anveshana_events_reg.php");
+			header("refresh:0;url=anveshana_events_reg.php");
 
 			
 
@@ -74,7 +75,7 @@
 
 		    echo "<script>alert(\"Already Registered - Events participation can be updated during the program\")</script>";
 
-			// header("refresh:0;url=../");
+			header("refresh:0;url=reg.php");
 
 		}
 

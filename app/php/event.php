@@ -29,6 +29,6 @@
         echo '<script>alert("Event Updation Failed");</script>';
     }
     
-    echo "<script>window.top.location='../home.php'</script>";
+    echo "<script>window.top.location='../events.php'</script>";
 
 ?>

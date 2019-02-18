@@ -29,7 +29,7 @@
 <!-- Latest compiled JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
-	<script type="text/javascript" src="validate.js"></script>
+	<script type="text/javascript" src="validate.js?1.0"></script>
 	<link rel="stylesheet" href="index.css">
 	<script type="text/javascript" src="index.js"></script>
 

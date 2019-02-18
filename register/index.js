@@ -10,7 +10,7 @@ function change() // courses events
     document.getElementById("select").options.length=0;
      document.getElementById("dept").options.length=0;
 
-        arr=["","CSE","IT","ECE","EEE","ME","CE","PE"];
+        arr=["","CSE","IT","ECE","EEE","MECH","CIVIL","PE"];
         arr1 = ["","I","II","III","IV"];
         arr2=["","DCME","DECE","DEEE","DME","DCE"];
         arr3=["MS"]
@@ -23,6 +23,7 @@ function change() // courses events
           var option = document.createElement("OPTION");
           txt= document.createTextNode(arr[i]);
           option.appendChild(txt);
+          option.value = arr[i];
           //OPTION.setAttribute("value",arr[i]);
           select.insertBefore(option,select.lastChild);
         }
@@ -34,6 +35,7 @@ function change() // courses events
           var option1 = document.createElement("OPTION");
           txt= document.createTextNode(arr1[i]);
           option1.appendChild(txt);
+          option1.value = arr1[i];
           //OPTION.setAttribute("value",arr[i]);
           select1.insertBefore(option1,select1.lastChild);
         }
@@ -55,6 +57,7 @@ function change() // courses events
           var option = document.createElement("OPTION"),
           txt= document.createTextNode(arr1[i]);
           option.appendChild(txt);
+          option.value = arr1[i];
           //OPTION.setAttribute("value",arr[i]);
           select.insertBefore(option,select.lastChild);
         }
@@ -66,6 +69,7 @@ function change() // courses events
           var option2 = document.createElement("OPTION");
           txt= document.createTextNode(arr2[i]);
           option2.appendChild(txt);
+          option2.value = arr2[i];
           //OPTION.setAttribute("value",arr[i]);
           dept.insertBefore(option2,dept.lastChild);
         }
@@ -82,6 +86,7 @@ function change() // courses events
           var option = document.createElement("OPTION"),
           txt= document.createTextNode(arr1[i]);
           option.appendChild(txt);
+          option2.value = arr1[i];
           //OPTION.setAttribute("value",arr[i]);
           select.insertBefore(option,select.lastChild);
         }
@@ -92,6 +97,7 @@ function change() // courses events
           var option = document.createElement("OPTION");
           txt= document.createTextNode(arr3[i]);
           option.appendChild(txt);
+          option2.value = arr3[i];
           //OPTION.setAttribute("value",arr[i]);
           MS.insertBefore(option,MS.lastChild);
         }
