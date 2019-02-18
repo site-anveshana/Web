@@ -1,0 +1,59 @@
+body{
+    background: url(img/bg.jpg)no-repeat;
+    background-size: cover; 
+    width: auto;
+    height: auto;
+}
+.change-nav{
+    background-color: rgba(0,0,0,0);
+    border: 0px;
+}
+.imgbox{
+    background: rgba(0, 0, 0, 0);
+    padding-left: 3%;
+    margin-right: 10%;
+    margin-top: 15%;
+    margin-left: 30%;
+}
+.loginbox{
+    background: rgba(0, 0, 0, 0);
+    padding: 3%;
+    margin-top: 30%;
+    margin-left: 30%;
+    margin-right: 70%;
+}
+.loginbox p {
+    font-family: "Comic Sans MS";
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
+}
+.loginbox input[type="text"],
+.loginbox input[type="password"]{
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    height: 20px;
+    size: 15px;
+}
+.btn{
+    font-family: "Comic Sans MS";
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+button.close {
+
+    padding: 20px;
+
+}
+
+.close{
+
+    font-size : 30px;
+
+}
+.row{
+    margin:50 px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login - Anveshana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default change-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="img/sasi.png" alt="" width="20%"></a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+            <div class="loginbox">
+                <form action="php/login.php" name="log" method="post">
+                    <div>
+                        <p>Username</p>
+                        <input type="text" id="user" name="user">
+                    </div>
+                    <div>
+                        <p>Password</p>
+                        <input type="password" id="pwd" name="pwd">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="submit" value="login" onclick="return val()" class="btn">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <div class="imgbox">
+                <img src="img/logo1.png" alt="" width="110%"> 
+            </div>
+            
+        </div>
+    </div>    
+</body>
+</html>
+
+
