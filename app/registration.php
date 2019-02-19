@@ -140,6 +140,8 @@
                             }
                         }
                         $req_amnt = $req_amnt - $sum;
+                        if($req_amnt < 0)
+                            $req_amnt = 0;
                         echo "₹".$req_amnt;
                     
                     ?>
