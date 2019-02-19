@@ -54,7 +54,7 @@ $row = $result->fetch_assoc();
 				<td colspan="3" align="center"><img src="img/logo1.png" width=500 height=200/></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="center">Techno-Cultural Fest   23rd &amp; 24
+				<td colspan="3" align="center">Techno-Cultural Fest   22nd &amp; 23 rd
 				February 2018</td>
 			</tr>
 			<tr>

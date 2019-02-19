@@ -62,6 +62,9 @@ tr:nth-child(even) {
 		
 <?php
 session_start();
+if(!isset($_SESSION['dept']) || !isset($_SESSION['htno'])){
+    header("refresh:0;url=../reg.php");
+}
 $dept = $_SESSION['dept'];
 $htno = $_SESSION['htno'];
 
@@ -84,8 +87,8 @@ if($result){
                 echo "else{";
                     echo "var x = document.createElement('table');";
                     echo "x.id='".$row['event_type']."';";
-                    echo "x.className ='col-lg-4 col-sm-6 col-md-12';";
-                    echo "if((document.getElementsByTagName('table').length)%3 == 0){";
+                    echo "x.className ='col-lg-3 col-sm-6 col-md-12';";
+                    echo "if((document.getElementsByTagName('table').length)%4 == 0){";
                         echo "a += 1;";
                         echo "var div = document.createElement('div');div.className = 'row';div.id='content'+a;";
                         echo "document.getElementById('content').appendChild(div);";
@@ -104,15 +107,61 @@ if($result){
 
 ?>
 </div>
+<div class="row form-group"></div>
 <!-- Register  Button -->
-      <div class="form-group">
-        <label class="col-md-4    control-label"></label>
-        <div class="col-md-4   "><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-warning" >  &nbsp;
-          REGISTER  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <div class="row form-group" align="center">
+            <div class="col-lg-2 col-sm-12">
+            <button type="submit" class="btn btn-warning">
+            REGISTER NOW</button>
+            </div>
+
+            <!-- <div class="col-lg-2 col-sm-12">
+            <button type="button" onclick="paynow()" class="btn btn-warning">
+            REGISTER & PAY ONLINE</button>
+            </div> -->
+
+            <script>
+                var input = document.createElement('input')
+                input.name = "onlinepay"
+                input.type = "hidden"
+                input.value = false
+                document.forms["form2"].appendChild(input);
+                function paynow(){
+                    document.forms["form2"]["onlinepay"].value = true;
+                    console.log( document.forms["form2"])
+                    document.forms["form2"].submit();
+                }
+
+                    
+                
+            </script>
+
+            <div class="col-lg-2 col-sm-12">
+            <button type="submit" class="btn btn-warning" >
+                <a href="index.php" style="text-decoration:none;color:white;">
+            CANCEL </a></button>
+            </div>
         </div>
+
 </form>
 
+<div class="row" align="center">
+<h4 style="color:blue; font-weight: bold"> PAID:	
+
+                <?php
+                    $result = $dbobj->search('anveshana_transaction','*',"HTNO","'".$htno."'");
+                    $sum = 0;
+                    if($result){
+                        while($row = $result->fetch_assoc()){
+                            $sum += $row["amount_paid"];
+                        }
+                    }
+                    echo "₹".$sum;
+                
+                ?>
+
+</h4>
+            </div>
 <?php
 
     $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
@@ -128,5 +177,6 @@ if($result){
     }
 ?>
      
+     <!-- <marquee behavior="alternate" style="color:red;font-size:12px">Payment will not be refunded once done...</marquee> -->
 </body>
 </html>

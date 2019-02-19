@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 	session_start();
 
@@ -10,15 +10,9 @@
 		
 	$dbc = new DBConnect();
 	$dbc->connect();
-	$flag=0;
-	$ecost = 100;
-	$status = 'no';
-	
-	$data = "";
-
-	$dbc->sqlQury("DELETE FROM `anveshana_registration` WHERE HTNO='$htno'");
-
-	$result = $dbc->search('anveshana_events','*',1,1);
+    $data = "";
+    
+    $data = $dbc->insert('anveshana_transactions','(HTNO, amount)','("'.$htno.'" ,"'.$ecost.'")');
 
 	if($result)
 
@@ -30,9 +24,8 @@
 					//echo $eid;
 					
 					$ecost = $row["event_cost"];
-					$sql = 'INSERT INTO  anveshana_registration (HTNO, event_id, amount, status) VALUES ("$htno" ,"$eid","$ecost","$status")';
 
-					$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status)','("'.$htno.'" ,"'.$eid.'","'.$ecost.'","'.$status.'")');
+					
 					
 				}
 		} 

@@ -17,8 +17,11 @@
 <head>
 
     <script>
-        if(sessionStorage.getItem('anveshana_username') != <?php echo $username; ?>)
-            window.top.location = '../index.html';
+        
+        // console.log(sessionStorage.getItem('anveshana_username') != <?php echo "'".$username."'"; ?>)
+        if(sessionStorage.getItem('anveshana_username') != <?php echo "'".$username."'"; ?>)
+            // console.log(sessionStorage.getItem('anveshana_username') )//!= <?php echo "'".$username."'"; ?>)
+            window.top.location = 'index.html';
 
     </script>
 

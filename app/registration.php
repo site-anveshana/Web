@@ -1,64 +1,55 @@
 <?php
 
     include('template/index.php');
+    
 ?>
-<!DOCTYPE html>
 
 <html>
 
-<head>
-
-    <title>Registration - Anveshana</title>
-
-</head>
+<title>Events - Anveshana</title>
 
 <body>
 
     <div class="container">
 
-        <!-- Trigger the modal with a button -->
-
-        <button type="button" class="btn btn-info btn-lg rbtn" data-toggle="modal" data-target="#myModal">Pay and confirm your registration </button>
-
 
 
         <!-- Modal -->
 
-        <div class="modal fade" id="myModal" role="dialog">
-
-            <div class="modal-dialog">
-
-
+        <div class="" id="myModal" role="dialog">
 
                 <!-- Modal content-->
 
                 <div class="modal-content">
 
-                    <div>
 
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body" style="margin:0;">
 
-                        <img src="img/logo1.png" alt="" width="80%" class="img">
+                    <form action="php/payment.php" name="form2" method="post" ID="content">
+                        <div class="content0">
+</div>
+            <div class="row" >
+            <div class="col-lg-8 col-sm-12">
+            <h4 style="color:purple; font-weight: bold" id="info"> <?php 
+                    echo strtoupper($_POST['htno'])."" ;
+                ?>	</h4>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                <button type="submit" class="btn btn-warning">
+                PAY NOW</button>
+                </div>
 
-                    </div>
-
-                    <div class="modal-body">
-
-                        <form action="pay.php" method="post">
-
-                            <label>Hall Ticket</label>
-
-                            <input type="text" name="htno" id="">
-
-                            <input type="submit" value="submit" class="btn abtn">
-
-                        </form>
-
+                <div class="col-lg-2 col-sm-12">
+                <button type="button" class="btn btn-warning" >
+                    <a href="payment.php" style="text-decoration:none;color:black;">
+                CANCEL</a></button>
+                </div>
+            </div>
+                    </form>
                     </div>
 
                 </div>
 
-            </div>
 
         </div>
 
@@ -68,7 +59,116 @@
 
 </html>
 
+<?php
+    if(!isset($_POST['htno'])){
+        header("refresh:0;url=../reg.php");
+    }
+    $htno = strtoupper($_POST['htno']);
 
+    $dbobj->connect();
 
+    $result = $dbobj->search('anveshana_participants','*',"HTNO","'".$htno."'");
+    $dept = "";
+    if($result){
+        if($row = $result->fetch_assoc()){
+            echo "<script>";
+                $info = "".$row['FIRSTNAME']." ".$row["LASTNAME"]." - ".$htno;
+                echo "document.getElementById('info').innerHTML = '".strtoupper($info)."'";
 
+            echo "</script>";
+            $dept = $row["DEPARTMENT"];
+        }
+    }
+
+    //query
+    $result = $dbobj->search('anveshana_events','*',1,1);
+
+    if($result){
+        echo "<script>var a = 0;";
+        while($row = $result->fetch_assoc()){
+                echo "if(document.getElementById('".$row['event_type']."')){";
+                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' onClick="newCheck()" id="'.$row['event_id'].'"  value="'.$row['event_cost'].'" >'.$row['event_name'].'</td></tr>\'';
+                echo "}";
+                if($dept == $row['event_type'] || $row['event_type'] == 'CENTRAL' || $row['event_type'] == 'CULTURAL' || $row['event_type'] == 'SPORTS'){
+                    echo "else{";
+                        echo "var x = document.createElement('table');";
+                        echo "x.id='".$row['event_type']."';";
+                        echo "x.className ='col-lg-3 col-sm-6 col-md-12';";
+                        echo "if((document.getElementsByTagName('table').length)%4 == 0){";
+                            echo "a += 1;";
+                            echo "var div = document.createElement('div');div.className = 'row';div.id='content'+a;";
+                            echo "document.getElementById('content').appendChild(div);";
+                        echo "}";
+                        echo "document.getElementById('content'+a).appendChild(x);";
+                        echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr> <td colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></td></tr class="checkbox-grid">\';';
+                        echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'" onClick="newCheck()" value="'.$row['event_cost'].'" >'.$row['event_name'].'</td></tr>\';';
+                    echo "}";
+                }
+
+            // $event_details .= '<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>';
+        }
+
+        $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
+        $req_amnt = 100;
+        if($result){
+            while($row = $result->fetch_assoc()){
+                echo "if(document.getElementById('".$row['event_id']."')){";
+                    echo "document.getElementById('".$row['event_id']."').checked = true;";
+                    $req_amnt += $row['amount'];
+                echo "}";
+            }
+        }
+        echo "</script>";
+    }
+
+    ?>
+    
+
+    <div class="row" align="center">
+    <div class="col-lg-6 col-sm-12">
+    <h4 style="color:blue; font-weight: bold" id="req"> REQUIRED:	
+
+                    <?php
+                        echo "₹".$req_amnt;
+                    
+                    ?>
+
+    </h4>
+</div>
+<div class="col-lg-6 col-sm-12">
+    <h4 style="color:blue; font-weight: bold"> PAID:	
+
+                    <?php
+                        $result = $dbobj->search('anveshana_transaction','*',"HTNO","'".$htno."'");
+                        $sum = 0;
+                        if($result){
+                            while($row = $result->fetch_assoc()){
+                                $sum += $row["amount"];
+                            }
+                        }
+                        $sum = $sum - $req_amnt;
+                        if($sum < 0)
+                            $sum = 0;
+                        echo "₹".$sum;
+
+                        echo "<script>sum = ".$sum."</script>";
+                    
+                    ?>
+    </h4>
+                    </div>
+                </div>
+
+    <script>
+        function newCheck(){
+            var x = document.getElementsByTagName('input')
+            var req = 100
+            for(var i=0;i<x.length;i++){
+                if(x[i].checked){
+                    req += parseInt(x[i].value)
+                }
+            }
+            document.getElementById('req').innerHTML = "REQUIRED: ₹"+(req-sum)
+        }
+                        
+    </script>
 

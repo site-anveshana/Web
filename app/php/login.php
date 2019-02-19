@@ -23,7 +23,7 @@
                 $_SESSION['anveshana_role'] = $row['role_id'];
                 echo "<script>sessionStorage.setItem('anveshana_role','".$row['role_id']."');</script>";
                 
-                header("Location: ../home.php");
+                header( "refresh:1;url=../home.php");
             }
             else{
                 echo '<img src="../img/wrong.png" alt="" width="70%">';

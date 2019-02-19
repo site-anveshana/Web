@@ -31,10 +31,10 @@
             if($this->serverName == "192.168.100.100"){
                 $this->conn = new mysqli($this->serverName, $this->username, $this->password, $this->dbName);
                 if($this->conn->connect_error){
-                    echo "<script>console.log('Connection Failed with 172.168.2.115.')</script>";
+                   // echo "<script>console.log('Connection Failed with 172.168.2.115.')</script>";
                 }
                 else{
-                    echo "<script>console.log('Connection Successful with 172.168.2.115.')</script>";
+                   // echo "<script>console.log('Connection Successful with 172.168.2.115.')</script>";
                 }
             }
             else if($this->serverName == "www.redants.info" ||$this->serverName == "redants.info" ){
@@ -44,10 +44,10 @@
                 $this->dbName = "redants";
                 $this->conn = new mysqli($this->serverName, $this->username, $this->password, $this->dbName);
                 if($this->conn->connect_error){
-                    echo "<script>console.log('Connection Failed with redants.info.')</script>";
+                   // echo "<script>console.log('Connection Failed with redants.info.')</script>";
                 }
                 else{
-                    echo "<script>console.log('Connection Successful with redants.info.')</script>";
+                   // echo "<script>console.log('Connection Successful with redants.info.')</script>";
                 }
             }
             else if($this->serverName == "mahalakshmifinance.000webhostapp.com"){
@@ -57,19 +57,19 @@
                     $this->dbName = "id6062084_mlf";
                     $this->conn = new mysqli($this->serverName, $this->username, $this->password, $this->dbName);
                     if($this->conn->connect_error){
-                        echo "<script>console.log('Connection Failed with 000webhost.com.')</script>";
+                       // echo "<script>console.log('Connection Failed with 000webhost.com.')</script>";
                     }
                     else{
-                        echo "<script>console.log('Connection Successful with 000webhost.com.')</script>";
+                       // echo "<script>console.log('Connection Successful with 000webhost.com.')</script>";
                     }
             }
             else if($this->serverName == "localhost"){
                 $this->conn = new mysqli($this->serverName, $this->username, $this->password, $this->dbName);
                     if($this->conn->connect_error){
-                        echo "<script>console.log('Connection Failed with localhost.')</script>";
+                       // echo "<script>console.log('Connection Failed with localhost.')</script>";
                     }
                     else{
-                        echo "<script>console.log('Connection Successful with localhost.')</script>";
+                       // echo "<script>console.log('Connection Successful with localhost.')</script>";
                     }
             }
             else{
@@ -88,13 +88,15 @@
 
             $sqlQry = "INSERT INTO ".$tableName." ".$columnNames." VALUES ".$values.";";
 
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
 
             if($this->conn->query($sqlQry) === True){
-                echo "<script>console.log('Inserted Successfully.')</script>";
+               // echo "<script>console.log('Inserted Successfully.')</script>";
+               return true;
             }
             else {
-               echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+              // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+              return false;
             }
         }
 
@@ -109,13 +111,15 @@
             }
             
 
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
             
             if($this->conn->query($sqlQry) === True){
-                echo "<script>console.log('Updated Successfully.')</script>";
+               // echo "<script>console.log('Updated Successfully.')</script>";
+               return true;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
 
         }
@@ -128,10 +132,12 @@
             ////echo "<script>console.log('".$sqlQry."')</script>";
             
             if($this->conn->query($sqlQry) === True){
-                echo "<script>console.log('Deleted Successfully.')</script>";
+               // echo "<script>console.log('Deleted Successfully.')</script>";
+               return true;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
 
         }
@@ -142,18 +148,18 @@
 
             $sqlQry = "SELECT ".$columnNames." FROM ".$tableName.";";
             
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
 
             $result = $this->conn->query($sqlQry);
 
             if($result->num_rows > 0){
-                echo "<script>console.log('Fetched Data Successfully.')</script>";
+               // echo "<script>console.log('Fetched Data Successfully.')</script>";
+               return $result;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
-
-            return $result;
 
         }
 
@@ -162,19 +168,19 @@
     
             $sqlQry = "SELECT ".$columnNames." FROM ".$tableName." WHERE ".$findByColumnName."=".$fndByValue.";";
 
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
             
             $result = $this->conn->query($sqlQry);
 
             if($result){
                 if($result->num_rows > 0)
-                echo "<script>console.log('Searched Data Successfully.')</script>";
+               echo "<script>console.log('Searched Data Successfully.')</script>";
+               return $result;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
-    
-            return $result;
     
         }
         function searchByOrder($tableName,$columnNames,$orderByColumnName){
@@ -182,42 +188,42 @@
     
             $sqlQry = "SELECT ".$columnNames." FROM ".$tableName." ORDER BY ".$orderByColumnName.";";
 
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
             
             $result = $this->conn->query($sqlQry);
     
             if($result->num_rows > 0){
-               echo "<script>console.log('Searched Data Successfully.')</script>";
+              // echo "<script>console.log('Searched Data Successfully.')</script>";
+              return $result;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
-    
-            return $result;
     
         }
 
         function sqlQury($sqlQry){
 
-            echo "<script>console.log('".$sqlQry."')</script>";
+           // echo "<script>console.log('".$sqlQry."')</script>";
             
             $result = $this->conn->query($sqlQry);
 
             if($result->num_rows > 0){
-               echo "<script>console.log('Query Successful.')</script>";
+              // echo "<script>console.log('Query Successful.')</script>";
+              return $result;
             }
             else {
-                echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+               return false;
             }
-    
-            return $result;
     
         }
 
 
         function __destruct(){
             $this->conn->close();
-            echo "<script>console.log('Connection Closed.')</script>";
+           // echo "<script>console.log('Connection Closed.')</script>";
         }
 
     }

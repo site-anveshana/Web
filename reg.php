@@ -1,3 +1,3 @@
 <script>
-	window.top.location='//sasi.ac.in/anveshana';
+	window.top.location='register/';
 </script>

@@ -8,6 +8,8 @@ function validate(){
       return false;
   }
 
+  htno.value = htno.value.toUpperCase()
+
   var name = form1["fname"]
   if(name.value.match(/[A-z\s]+/)[0] !== name.value){
     name.focus();
@@ -39,14 +41,14 @@ function validate(){
 
   var email = form1["email"]
 
-  if(email.value == "" || email.value.match(/[A-z0-9]+@[A-z]\.[A-z]/)[0] !== email.value){
+  if(email.value == "" || email.value.match(/[A-z0-9_\.-]+@[A-z\.]+/)[0] !== email.value){
     alert("Invalid Email address");
     return false;
   }
 
   if (document.form1.mobile.value.length !=10 )
   {
-      alert("enter valid mobile number");
+      alert("Invalid Mobile Number");
       return false;
   }
   if(document.form1.ev.value=="" && document.form1.ev1.value=="" && document.form1.ev2.value=="")

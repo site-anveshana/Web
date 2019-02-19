@@ -51,15 +51,25 @@
 
 	$dbc->connect();
 
-		$data = $dbc->insert('anveshana_participants',"(HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )","('$htno' ,'$fname', '$lname' , '$gender' , '$course' , '$department' , '$year' , '$college' ,'$email' ,'$mobile')");
+	$data = $dbc->insert('anveshana_participants',"(HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )","('$htno' ,'$fname', '$lname' , '$gender' , '$course' , '$department' , '$year' , '$college' ,'$email' ,'$mobile')");
 
 		
 
 		if ($data) {
 
-			
+			$username = "sasicollege";
+			$password = "SITE2002";
+			$numbers = $mobile; // mobile number
+			$from = urlencode('INSITE'); // assigned Sender_ID
+			$raw_msg = $fname." ".$lname." , you have been successfully registered for SITE Anveshana 2K19\nCheck out sasi.ac.in/anveshana for more...";
+			$message = urlencode($raw_msg); // Message text required to deliver on mobile number
+			$data = "username="."$username"."&password="."$password"."&to="."$numbers"."&from="."$from"."&msg="."$message"."&type=1&dnd_check=0";
+			$data = "https://www.smsstriker.com/API/sms.php?".$data;
 
-		    //echo "<script>alert(\"REGISTERED SUCCESFULLY\")</script>";
+			$ch = curl_init();
+			curl_setopt($ch,CURLOPT_URL,$data);
+			$response = curl_exec($ch);
+			curl_close($ch);
 
 			
 
@@ -72,6 +82,7 @@
 		}
 
 		header("refresh:0;url=anveshana_events_reg.php");
+			
 
 ?>
 

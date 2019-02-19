@@ -115,9 +115,11 @@
             
             if($this->conn->query($sqlQry) === True){
                 // echo "<script>console.log('Updated Successfully.')</script>";
+                return true;
             }
             else {
                 // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+                return false;
             }
 
         }
@@ -131,9 +133,11 @@
             
             if($this->conn->query($sqlQry) === True){
                 // echo "<script>console.log('Deleted Successfully.')</script>";
+                return true;
             }
             else {
                 // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+                return false;
             }
 
         }
@@ -153,6 +157,7 @@
             }
             else {
                 // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+                return false;
             }
 
             return $result;
@@ -195,6 +200,7 @@
             }
             else {
                 // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+                return false;
             }
     
             return $result;
@@ -207,11 +213,14 @@
             
             $result = $this->conn->query($sqlQry);
 
-            if($result->num_rows > 0){
-               // echo "<script>console.log('Query Successful.')</script>";
+            if($result){
+                if($result->num_rows > 0)
+                    // echo "<script>console.log('Query Successful.')</script>";
+                    return $result;
             }
             else {
                 // echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+                return false;
             }
     
             return $result;
