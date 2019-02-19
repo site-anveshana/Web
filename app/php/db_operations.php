@@ -174,11 +174,11 @@
 
             if($result){
                 if($result->num_rows > 0)
-               echo "<script>console.log('Searched Data Successfully.')</script>";
+            //    echo "<script>console.log('Searched Data Successfully.')</script>";
                return $result;
             }
             else {
-               echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
+            //    echo "<script>console.log('Error: " . $sqlQry . mysqli_error($this->conn)."')</script>";
                return false;
             }
     

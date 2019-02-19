@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2018 at 10:01 AM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 5.6.32
+-- Generation Time: Feb 19, 2019 at 12:08 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `colleges`
+-- Table structure for table `anveshana_colleges`
 --
 
-CREATE TABLE `colleges` (
+CREATE TABLE `anveshana_colleges` (
   `SNO` int(3) DEFAULT NULL,
   `CODE` varchar(6) DEFAULT NULL,
   `NAME` varchar(59) DEFAULT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `colleges` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `colleges`
+-- Dumping data for table `anveshana_colleges`
 --
 
-INSERT INTO `colleges` (`SNO`, `CODE`, `NAME`, `PLACE`, `DIST`, `REGION`, `CTYPE`) VALUES
+INSERT INTO `anveshana_colleges` (`SNO`, `CODE`, `NAME`, `PLACE`, `DIST`, `REGION`, `CTYPE`) VALUES
 (1, 'ABRK', 'ABR COLLEGE OF ENGG AND TECHNOLOGY', 'KANIGIRI', 'PKS', 'AU', 'COED'),
 (2, 'ACEE', 'ADARSH COLLEGE OF ENGINEERING', 'GOLLAPROLU', 'EG', 'AU', 'COED'),
 (3, 'ACEM', 'ADITYA COLLEGE OF ENGINEERING', 'MADANAPALLE', 'CTR', 'SVU', 'COED'),
@@ -469,10 +469,104 @@ INSERT INTO `colleges` (`SNO`, `CODE`, `NAME`, `PLACE`, `DIST`, `REGION`, `CTYPE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `anveshana_events`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `anveshana_events` (
+  `event_id` bigint(20) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  `event_type` varchar(255) NOT NULL,
+  `event_cost` int(11) NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anveshana_events`
+--
+
+INSERT INTO `anveshana_events` (`event_id`, `event_name`, `event_type`, `event_cost`, `created_by`) VALUES
+(1, 'TREASURE HUNT', 'CENTRAL', 100, '16K61A05G7'),
+(2, 'CRAZY ROCKET', 'CENTRAL', 100, '16K61A05G7'),
+(3, 'QUICK SAND', 'CENTRAL', 100, '16K61A05G7'),
+(4, 'MR.POWER', 'CENTRAL', 100, '16K61A05G7'),
+(5, 'RC FOOT BALL', 'CENTRAL', 100, '16K61A05G7'),
+(6, 'F2', 'CENTRAL', 100, '16K61A05G7'),
+(7, 'VIDEO & SONG DEDICATION', 'CENTRAL', 100, '16K61A05G7'),
+(8, 'SELFIE CONTEST', 'CENTRAL', 100, '16K61A05G7'),
+(9, 'MISS VIGOR', 'CENTRAL', 100, '16K61A05G7'),
+(10, 'SOS', 'CENTRAL', 100, '16K61A05G7'),
+(11, 'BLINDFOLD', 'CENTRAL', 100, '16K61A05G7'),
+(12, 'DANCE', 'CULTURAL', 100, '16K61A05G7'),
+(13, 'SINGING', 'CULTURAL', 100, '16K61A05G7'),
+(14, 'RAMP WALK', 'CULTURAL', 100, '16K61A05G7'),
+(15, 'PHOTOGRAPHY', 'CULTURAL', 100, '16K61A05G7'),
+(16, 'CRAFT FAIR', 'CULTURAL', 100, '16K61A05G7'),
+(17, 'CREATIVE WRITING', 'CULTURAL', 100, '16K61A05G7'),
+(18, 'I GOT TALENT', 'CULTURAL', 100, '16K61A05G7'),
+(19, 'SHORT FILM', 'CULTURAL', 100, '16K61A05G7'),
+(20, 'PAPER PRESENTATION', 'CIVIL', 100, '16K61A05G7'),
+(21, 'POSTER PRESENTATION', 'CIVIL', 100, '16K61A05G7'),
+(22, 'PROJECT EXPO', 'CIVIL', 100, '16K61A05G7'),
+(23, 'TECHNICAL QUIZ', 'CIVIL', 100, '16K61A05G7'),
+(24, 'IDEA BUCKET', 'CIVIL', 100, '16K61A05G7'),
+(25, 'CAD RAW', 'CIVIL', 100, '16K61A05G7'),
+(26, 'TALL STRUCTURES', 'CIVIL', 100, '16K61A05G7'),
+(27, 'SPOT EVENT (BRICK MASONRY)', 'CIVIL', 100, '16K61A05G7'),
+(28, 'PAPER PRESENTATION', 'EEE', 100, '16K61A05G7'),
+(29, 'POSTER PRESENTATION', 'EEE', 100, '16K61A05G7'),
+(30, 'PROJECT EXPO', 'EEE', 100, '16K61A05G7'),
+(31, 'TECHNICAL QUIZ', 'EEE', 100, '16K61A05G7'),
+(32, 'TECHNICAL PUZZLE', 'EEE', 100, '16K61A05G7'),
+(33, 'IDEA BUCKET', 'EEE', 100, '16K61A05G7'),
+(34, 'PAPER PRESENTATION', 'MECH', 100, '16K61A05G7'),
+(35, 'POSTER PRESENTATION', 'MECH', 100, '16K61A05G7'),
+(36, 'PROJECT EXPO', 'MECH', 100, '16K61A05G7'),
+(37, 'TECHNICAL QUIZ', 'MECH', 100, '16K61A05G7'),
+(38, 'IDEA BUCKET', 'MECH', 100, '16K61A05G7'),
+(39, 'CAD CONTEST', 'MECH', 100, '16K61A05G7'),
+(40, 'MACHINO', 'MECH', 100, '16K61A05G7'),
+(41, 'LATHE MASTER', 'MECH', 100, '16K61A05G7'),
+(42, 'PAPER PRESENTATION', 'ECE', 100, '16K61A05G7'),
+(43, 'POSTER PRESENTATION', 'ECE', 100, '16K61A05G7'),
+(44, 'PROJECT EXPO', 'ECE', 100, '16K61A05G7'),
+(45, 'TECHNICAL QUIZ', 'ECE', 100, '16K61A05G7'),
+(46, 'IDEA BUCKET', 'ECE', 100, '16K61A05G7'),
+(47, 'CODING CONTEST', 'ECE', 100, '16K61A05G7'),
+(48, 'CIRCUIT-MANIA', 'ECE', 100, '16K61A05G7'),
+(49, 'E-CUBIC', 'ECE', 100, '16K61A05G7'),
+(50, 'PAPER PRESENTATION', 'CSE', 100, '16K61A05G7'),
+(51, 'POSTER PRESENTATION', 'CSE', 100, '16K61A05G7'),
+(52, 'PROJECT EXPO', 'CSE', 100, '16K61A05G7'),
+(53, 'TECHNICAL QUIZ', 'CSE', 100, '16K61A05G7'),
+(54, 'IDEA BUCKET', 'CSE', 100, '16K61A05G7'),
+(55, 'DEBUGGING CONTEST', 'CSE', 100, '16K61A05G7'),
+(56, 'CODING CONTEST', 'CSE', 100, '16K61A05G7'),
+(57, 'PAPER PRESENTATION', 'IT', 100, '16K61A05G7'),
+(58, 'POSTER PRESENTATION', 'IT', 100, '16K61A05G7'),
+(59, 'PROJECT EXPO', 'IT', 100, '16K61A05G7'),
+(60, 'TECHNICAL QUIZ', 'IT', 100, '16K61A05G7'),
+(61, 'IDEA BUCKET', 'IT', 100, '16K61A05G7'),
+(62, 'CODING CONTEST', 'IT', 100, '16K61A05G7'),
+(63, 'YOUNG MANAGER', 'MS', 100, '16K61A05G7'),
+(64, 'STOCK GAME', 'MS', 100, '16K61A05G7'),
+(65, 'BUSINESS QUIZ', 'MS', 100, '16K61A05G7'),
+(66, 'BUSINESS PLAN', 'MS', 100, '16K61A05G7'),
+(67, 'AD-MAKING', 'MS', 100, '16K61A05G7'),
+(68, 'VOLLEY BALL', 'SPORTS', 900, '16K61A05G7'),
+(69, 'THROW BALL', 'SPORTS', 900, '16K61A05G7'),
+(70, 'TABLE TENNIS', 'SPORTS', 900, '16K61A05G7'),
+(71, 'TENNICOIT', 'SPORTS', 900, '16K61A05G7'),
+(72, 'CARROMS', 'SPORTS', 900, '16K61A05G7'),
+(73, 'CHESS', 'SPORTS', 900, '16K61A05G7'),
+(74, 'KABADDI', 'SPORTS', 900, '16K61A05G7');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_participants`
+--
+
+CREATE TABLE `anveshana_participants` (
   `HTNO` varchar(15) NOT NULL,
   `FIRSTNAME` varchar(100) NOT NULL,
   `LASTNAME` varchar(100) NOT NULL,
@@ -483,59 +577,260 @@ CREATE TABLE `users` (
   `COLLEGE` varchar(150) NOT NULL,
   `EMAIL` varchar(100) NOT NULL,
   `MOBILE` varchar(15) NOT NULL,
-  `EVENT1` varchar(100) NOT NULL,
-  `EVENT2` varchar(100) NOT NULL,
-  `EVENT3` varchar(100) NOT NULL,
-  `EVENT4` varchar(100) NOT NULL,
-  `EVENT5` varchar(100) NOT NULL,
-  `EVENT6` varchar(100) NOT NULL,
-  `EVENT7` varchar(100) NOT NULL,
-  `EVENT8` varchar(100) NOT NULL,
-  `EVENT9` varchar(100) NOT NULL,
-  `EVENT10` varchar(100) NOT NULL,
-  `EVENT11` varchar(100) NOT NULL,
-  `EVENT12` varchar(100) NOT NULL,
-  `EVENT13` varchar(100) NOT NULL,
-  `EVENT14` varchar(100) NOT NULL,
-  `EVENT15` varchar(100) NOT NULL,
-  `EVENT16` varchar(100) NOT NULL,
-  `EVENT17` varchar(100) NOT NULL,
-  `EVENT18` varchar(100) NOT NULL,
-  `EVENT19` varchar(100) NOT NULL,
-  `EVENT20` varchar(100) NOT NULL,
-  `EVENT21` varchar(100) NOT NULL,
-  `EVENT22` varchar(100) NOT NULL,
-  `EVENT23` varchar(100) NOT NULL,
-  `EVENT24` varchar(100) NOT NULL,
-  `EVENT25` varchar(100) NOT NULL,
-  `EVENT26` varchar(100) NOT NULL,
-  `EVENT27` varchar(100) NOT NULL,
-  `EVENT28` varchar(100) NOT NULL,
-  `EVENT29` varchar(100) NOT NULL,
-  `EVENT30` varchar(100) NOT NULL,
-  `EVENT31` varchar(100) NOT NULL,
-  `TOR` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `PAID` int(11) NOT NULL
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `anveshana_participants`
 --
 
-INSERT INTO `users` (`HTNO`, `FIRSTNAME`, `LASTNAME`, `GENDER`, `COURSE`, `DEPARTMENT`, `YEAR`, `COLLEGE`, `EMAIL`, `MOBILE`, `EVENT1`, `EVENT2`, `EVENT3`, `EVENT4`, `EVENT5`, `EVENT6`, `EVENT7`, `EVENT8`, `EVENT9`, `EVENT10`, `EVENT11`, `EVENT12`, `EVENT13`, `EVENT14`, `EVENT15`, `EVENT16`, `EVENT17`, `EVENT18`, `EVENT19`, `EVENT20`, `EVENT21`, `EVENT22`, `EVENT23`, `EVENT24`, `EVENT25`, `EVENT26`, `EVENT27`, `EVENT28`, `EVENT29`, `EVENT30`, `EVENT31`, `TOR`, `PAID`) VALUES
-('14K61A05B0', 'SUBHASH', 'KOMMINA', 'male', 'B.Tech', 'CSE', 'IV', 'AKRG COLLEGE OF ENGG AND TECHNOLOGY', 'sankarcse@sasi.ac.in', '7659893339', 'Paper Presentation', 'Project Expo', 'Quiz', 'CAD Contest', 'Coding Contest', 'Idea Bucket', 'Poster Presentation', 'Volley Ball', 'Throw Ball', 'Chess', 'Carroms', 'Table Tennis', 'Running ', 'Relay', 'Short Film Contest', 'I Got a Talent', 'Ramp Walk', 'Creative Writing', 'MakeOver', 'Craft Fair', 'Photography', 'Teasure Hunt', 'Race Your Moto', 'Singing', 'Dancing', 'Face Painting', 'NA', 'NA', 'NA', 'NA', 'NA', '2018-02-12 12:22:44', 0),
-('15k65a0503', 'Eswar Aravind', 'Donelli', 'male', 'B.Tech', 'CSE', 'IV', 'SASI INSTITUTE OF TECHNOLOGY AND ENGINEERING', 'aravinddonelli@gmail.com', '9493982155', 'Paper Presentation', 'Project Expo', 'Quiz', 'CAD Contest', 'Coding Contest', 'Idea Bucket', 'Poster Presentation', 'Volley Ball', 'Throw Ball', 'Chess', 'Carroms', 'Table Tennis', 'Running ', 'Relay', 'Short Film Contest', 'I Got a Talent', 'Ramp Walk', 'Creative Writing', 'MakeOver', 'Craft Fair', 'Photography', 'Teasure Hunt', 'Race Your Moto', 'Singing', 'Dancing', 'Face Painting', 'NA', 'NA', 'NA', 'NA', 'NA', '2018-02-12 12:09:44', 0),
-('15K65A0507', 'Srinivas', 'kankatala', 'male', 'B.Tech', 'CSE', 'IV', 'SASI INSTITUTE OF TECHNOLOGY AND ENGINEERING', 'srinu.kankatala@gmail.com', '8886234000', 'Paper Presentation', 'Project Expo', 'Quiz', 'CAD Contest', 'Coding Contest', 'Idea Bucket', 'Poster Presentation', 'Volley Ball', 'Throw Ball', 'Chess', 'Carroms', 'Table Tennis', 'Running ', 'Relay', 'Short Film Contest', 'I Got a Talent', 'Ramp Walk', 'Creative Writing', 'MakeOver', 'Craft Fair', 'Photography', 'Teasure Hunt', 'Race Your Moto', 'Singing', 'Dancing', 'Face Painting', 'NA', 'NA', 'NA', 'NA', 'NA', '2018-02-12 12:16:22', 0);
+INSERT INTO `anveshana_participants` (`HTNO`, `FIRSTNAME`, `LASTNAME`, `GENDER`, `COURSE`, `DEPARTMENT`, `YEAR`, `COLLEGE`, `EMAIL`, `MOBILE`, `timestamp`) VALUES
+('16K61A05G7', 'VIJAYA GOPINADH REDDY', 'VELAGALA', 'male', 'B.Tech', 'CSE', 'III', 'SASI INSTITUTE OF TECHNOLOGY AND ENGINEERING', 'gopinadh5g7@sasi.ac.in', '9949582550', '2019-02-16 07:22:27'),
+('CSE', '', '', '', '', '', '', '', '', '', '2019-02-16 11:38:24'),
+('ECE', '', '', '', '', '', '', '', '', '', '2019-02-16 11:38:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_registration`
+--
+
+CREATE TABLE `anveshana_registration` (
+  `HTNO` varchar(15) NOT NULL,
+  `event_id` bigint(20) NOT NULL,
+  `amount` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_roles`
+--
+
+CREATE TABLE `anveshana_roles` (
+  `role_id` bigint(20) NOT NULL,
+  `role_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anveshana_roles`
+--
+
+INSERT INTO `anveshana_roles` (`role_id`, `role_name`) VALUES
+(1, 'ADMIN'),
+(2, 'MODERATOR'),
+(3, 'COORDINATOR'),
+(4, 'ORGANISER'),
+(5, 'USER');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_role_services`
+--
+
+CREATE TABLE `anveshana_role_services` (
+  `role_id` bigint(20) NOT NULL,
+  `service_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anveshana_role_services`
+--
+
+INSERT INTO `anveshana_role_services` (`role_id`, `service_id`) VALUES
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 7),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 7),
+(3, 5),
+(3, 7),
+(4, 7),
+(5, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_services`
+--
+
+CREATE TABLE `anveshana_services` (
+  `service_id` bigint(20) NOT NULL,
+  `service_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anveshana_services`
+--
+
+INSERT INTO `anveshana_services` (`service_id`, `service_name`) VALUES
+(1, 'HOME'),
+(2, 'USERS'),
+(3, 'EVENTS'),
+(4, 'PAYMENT'),
+(5, 'ALERT'),
+(7, 'REPORTS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_transactions`
+--
+
+CREATE TABLE `anveshana_transactions` (
+  `transaction` bigint(20) NOT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
+  `HTNO` varchar(15) DEFAULT NULL,
+  `amount` double NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anveshana_users`
+--
+
+CREATE TABLE `anveshana_users` (
+  `username` varchar(10) NOT NULL,
+  `password` varchar(255) NOT NULL DEFAULT 'a48baea16e7e1194826a8a2366f84e6f',
+  `role_id` bigint(20) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anveshana_users`
+--
+
+INSERT INTO `anveshana_users` (`username`, `password`, `role_id`, `timestamp`) VALUES
+('16K61A05G7', 'a48baea16e7e1194826a8a2366f84e6f', 1, '2019-02-16 07:24:19'),
+('CSE', '1f2411b2f93b1342d5c06ebf4a7893e7', 2, '2019-02-16 11:38:59'),
+('ECE', '98defd6ee70dfb1dea416cecdf391f58', 3, '2019-02-16 11:38:59');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `anveshana_events`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`HTNO`);
+ALTER TABLE `anveshana_events`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `anveshana_participants`
+--
+ALTER TABLE `anveshana_participants`
+  ADD PRIMARY KEY (`HTNO`),
+  ADD UNIQUE KEY `HTNO` (`HTNO`);
+
+--
+-- Indexes for table `anveshana_registration`
+--
+ALTER TABLE `anveshana_registration`
+  ADD UNIQUE KEY `HTNO` (`HTNO`,`event_id`),
+  ADD KEY `event_map` (`event_id`);
+
+--
+-- Indexes for table `anveshana_roles`
+--
+ALTER TABLE `anveshana_roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Indexes for table `anveshana_role_services`
+--
+ALTER TABLE `anveshana_role_services`
+  ADD UNIQUE KEY `role_id` (`role_id`,`service_id`),
+  ADD KEY `service_id_map` (`service_id`);
+
+--
+-- Indexes for table `anveshana_services`
+--
+ALTER TABLE `anveshana_services`
+  ADD PRIMARY KEY (`service_id`);
+
+--
+-- Indexes for table `anveshana_transactions`
+--
+ALTER TABLE `anveshana_transactions`
+  ADD PRIMARY KEY (`transaction`),
+  ADD UNIQUE KEY `transaction` (`transaction`,`HTNO`),
+  ADD UNIQUE KEY `transaction_2` (`transaction`,`transaction_id`),
+  ADD KEY `htno_map2` (`HTNO`);
+
+--
+-- Indexes for table `anveshana_users`
+--
+ALTER TABLE `anveshana_users`
+  ADD PRIMARY KEY (`username`),
+  ADD KEY `role_id_map` (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `anveshana_events`
+--
+ALTER TABLE `anveshana_events`
+  MODIFY `event_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT for table `anveshana_roles`
+--
+ALTER TABLE `anveshana_roles`
+  MODIFY `role_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `anveshana_services`
+--
+ALTER TABLE `anveshana_services`
+  MODIFY `service_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `anveshana_transactions`
+--
+ALTER TABLE `anveshana_transactions`
+  MODIFY `transaction` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `anveshana_registration`
+--
+ALTER TABLE `anveshana_registration`
+  ADD CONSTRAINT `event_map` FOREIGN KEY (`event_id`) REFERENCES `anveshana_events` (`event_id`),
+  ADD CONSTRAINT `htno_map` FOREIGN KEY (`HTNO`) REFERENCES `anveshana_participants` (`HTNO`);
+
+--
+-- Constraints for table `anveshana_role_services`
+--
+ALTER TABLE `anveshana_role_services`
+  ADD CONSTRAINT `role_id_map2` FOREIGN KEY (`role_id`) REFERENCES `anveshana_roles` (`role_id`),
+  ADD CONSTRAINT `service_id_map` FOREIGN KEY (`service_id`) REFERENCES `anveshana_services` (`service_id`);
+
+--
+-- Constraints for table `anveshana_transactions`
+--
+ALTER TABLE `anveshana_transactions`
+  ADD CONSTRAINT `htno_map2` FOREIGN KEY (`HTNO`) REFERENCES `anveshana_participants` (`HTNO`);
+
+--
+-- Constraints for table `anveshana_users`
+--
+ALTER TABLE `anveshana_users`
+  ADD CONSTRAINT `role_id_map` FOREIGN KEY (`role_id`) REFERENCES `anveshana_roles` (`role_id`),
+  ADD CONSTRAINT `username_map` FOREIGN KEY (`username`) REFERENCES `anveshana_participants` (`HTNO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

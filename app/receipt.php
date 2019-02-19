@@ -1,61 +1,70 @@
 <?php
-session_start();
-$user  = $_SESSION["user"];
 
-
-    if(empty($user)){
-
-            header( "refresh:0;url=index.html" );
-
-}    
+    include('template/index.php');
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title></title>
-<meta name="generator" content="LibreOffice 5.0.3.2 (Linux)" />
-<meta name="author" content="Michael " />
-<meta name="created" content="2015-05-02T23:36:12.956263144" />
-<meta name="changedby" content="Michael " />
-<meta name="changed" content="2015-05-02T23:43:32.542260128" />
-<style type="text/css">
-table {
-	margin-bottom: 0.25cm;
-	line-height: 120%;
-	font-size: 250%;
-}
-</style>
+
+    <title>Print - Anveshana</title>
+
 </head>
-<body lang="en-AU" dir="ltr">
 
-<?php
-ob_start();
-include_once("DBConnect.php");
-$dbc = new DBConnect();
-$dbc->connect();
+<body>
 
-//$htno = $_POST['htno'];
-$htno = $_SESSION["htno"];
+    <div class="container">
 
-$sql="select * from  users where HTNO="."'".$htno."'";
-//$sql="select * from  prie where HTNO='15K61A0503'";
-$result=$dbc->read($sql);
+		<?php
+			$htno = false;
+			$result3 = false;
+			if(!isset($_SESSION['htno']))
+				if(!isset($_GET['htno']))
+					header("refresh:0;url=payment.php");
+				else{
+					$_GET['htno'] = strtoupper($_GET['htno']);
+					$htno = $_GET['htno'];
+					$result3 = $dbobj->search('anveshana_transactions','*',"HTNO","'".$htno."' order by transaction desc");
+				}
+			else
+				$htno = $_SESSION['htno'];
 
-//$row = $result->num_rows;
-$row = $result->fetch_assoc();
-//echo $row;
+			// if(!$htno)
+			// 	header("refresh:0;url=payment.php");
 
-?>
-	<p>
-	
-		<table >
+			$result1 = $dbobj->search('anveshana_participants','*',"HTNO","'".$htno."'");
+			if(!$result3)
+				$result3 = $dbobj->search('anveshana_transactions','*',"HTNO","'".$htno."' and transaction_id like '".$_SESSION['anveshana_username']."' order by transaction desc");
+			$result = $dbobj->search('anveshana_events','*',1,1);
+
+			if(!$result1 || !$result2 || !$result3 || !$result){
+				// header("refresh:0;url=payment.php");
+			}
+			$row1 = $result1->fetch_assoc();
+			$row3 = $result3->fetch_assoc();
+
+		?>
+
+        <!-- Modal -->
+
+        <div class="" id="myModal" role="dialog">
+
+                <!-- Modal content-->
+
+                <div class="modal-content">
+
+
+					<div class="modal-body" style="margin:0;">
+							<div id="content">
+
+							<table>
 				<tr>
 				<td colspan="3" align="center"><img src="img/logo1.png" width=500 height=200/></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">Techno-Cultural Fest   22nd &amp; 23 rd
-				February 2018</td>
+				February 2019</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center"><b>SASI INSTITUTE OF TECHNOLOGY AND ENGINEERING</b></td>
@@ -72,52 +81,76 @@ $row = $result->fetch_assoc();
 				<td colspan="3"><hr/></td>
 			</tr>
 			<tr >
-				<td align="left">No:<?php echo $row["rno"]; ?></td>
+				<td align="left">No:<?php echo $row3["transaction"]; ?></td>
 				<td align="center"><b>Original Copy</b></td>
-				<td align="left">Date:<?php echo substr($row["TOR"],0,10); ?></td>
+				<td align="left">Date:<?php echo substr($row3["timestamp"],0,10); ?></td>
 			</tr>
 			<tr>
-				<td >Regd No.:<?php echo $row["HTNO"]; ?></td>
-				<td align="center" colspan="2">Name:<?php echo $row["FIRSTNAME"]; ?></td>
+				<td >Regd No.:<?php echo $row1["HTNO"]; ?></td>
+				<td align="center" colspan="2">Name:<?php echo $row1["FIRSTNAME"]; ?></td>
 				
 			</tr>
+			<tr align="center">
+				<td colspan="3"><hr></td>
+			</tr>
 			<?php
-			$i=1;
-			$ev="EVENT";
-			while($i<=33)
-			{
-				$eve = $ev.$i;
-				if($row[$eve] !="NA")
-				{
-					echo "<tr>";
-					echo "<td colspan='2'>$row[$eve] </td>";
-					echo "<td>100</td>";
-					echo "<tr>";
+			
+			while($row = $result->fetch_assoc()){
+				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id='".$row['event_id']."' order by timestamp");
+				if($result2)
+				if($result2->num_rows > 0)
+				if($row2 = $result2->fetch_assoc()){
+					// if($row2["event_id"] == $value){
+						echo "<tr>";
+						echo "<td colspan='2'>".$row['event_name'] ."</td>";
+						echo "<td>".$row['event_cost']."</td>";
+						echo "<tr>";
+					// }
 				}
-				$i++;
 			}
 			?>
 			<tr>
-				<td colspan="3">Amount: <?php echo $row["PAID"]; ?></td>
+				<td colspan="3">Amount: ₹<?php echo $row3["amount"]; ?></td>
 			</tr>
 			
 			<tr align="right">
-				<td colspan="3" height="50px" >  Signature of <?php echo $user; ?></td>
+				<td colspan="3" height="50px" > Signature of <?php echo $_SESSION['anveshana_username']; ?></td>
 			</tr>
-</table>
-	</p>
-	<div align="center" class="noprint">
+</table>	
 
 
+							</div>
 
-<button onclick="myFunction()">Print this page</button>
-<a href="reg.php"><button>Go Back</button></a>
-</div>
+							<div class="row">
+								<div align="center" class="noprint">
 
-<script>
-function myFunction() {
-    window.print();
-}
-</script>
+								<div class="col-md-6 col-lg-4 col-sm-6 form-group" >
+                                <input type="button"onclick="myFunction()" value="Print this page" class="btn abtn">
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 form-group">
+								<a href="payment.php"><button class="btn abtn">Go Back</button></a>
+                            </div>
+								
+								</div>
+
+								<script>
+								function myFunction() {
+									window.print();
+								}
+								</script>
+
+							</div>
+                    
+                    </div>
+
+                </div>
+
+
+        </div>
+
+    </div>
+
 </body>
+
 </html>
+

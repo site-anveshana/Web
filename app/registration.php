@@ -26,6 +26,8 @@
                     <div class="modal-body" style="margin:0;">
 
                     <form action="php/payment.php" name="form2" method="post" ID="content">
+                        <input name="sum" type="hidden">
+                        <input name="req" type="hidden">
                         <div class="content0">
 </div>
             <div class="row" >
@@ -61,8 +63,9 @@
 
 <?php
     if(!isset($_POST['htno'])){
-        header("refresh:0;url=../reg.php");
+        header("refresh:0;url=payment.php");
     }
+    $_SESSION['htno'] = $_POST['htno'];
     $htno = strtoupper($_POST['htno']);
 
     $dbobj->connect();
@@ -129,6 +132,14 @@
     <h4 style="color:blue; font-weight: bold" id="req"> REQUIRED:	
 
                     <?php
+                        $result = $dbobj->search('anveshana_transactions','*',"HTNO","upper('".$htno."')");
+                        $sum = 0;
+                        if($result){
+                            while($row = $result->fetch_assoc()){
+                                $sum += $row["amount"];
+                            }
+                        }
+                        $req_amnt = $req_amnt - $sum;
                         echo "₹".$req_amnt;
                     
                     ?>
@@ -139,19 +150,9 @@
     <h4 style="color:blue; font-weight: bold"> PAID:	
 
                     <?php
-                        $result = $dbobj->search('anveshana_transaction','*',"HTNO","'".$htno."'");
-                        $sum = 0;
-                        if($result){
-                            while($row = $result->fetch_assoc()){
-                                $sum += $row["amount"];
-                            }
-                        }
-                        $sum = $sum - $req_amnt;
-                        if($sum < 0)
-                            $sum = 0;
                         echo "₹".$sum;
 
-                        echo "<script>sum = ".$sum."</script>";
+                        echo "<script>sum = ".$sum.";document.form2.sum.value = sum;</script>";
                     
                     ?>
     </h4>
@@ -161,13 +162,15 @@
     <script>
         function newCheck(){
             var x = document.getElementsByTagName('input')
-            var req = 100
+            var req = 100;
             for(var i=0;i<x.length;i++){
                 if(x[i].checked){
                     req += parseInt(x[i].value)
                 }
             }
             document.getElementById('req').innerHTML = "REQUIRED: ₹"+(req-sum)
+            
+            document.form2.req.value = (req-sum);
         }
                         
     </script>

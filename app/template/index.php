@@ -56,7 +56,13 @@
 
 <body>
 	
-    <nav class="navbar navbar-default change-nav">
+    <nav class="navbar navbar-default change-nav" style="margin-bottom:6%;">
+        <style>
+            li{
+                margin-bottom:10px;
+            }
+        
+        </style>
 
         <div class="container-fluid">
 

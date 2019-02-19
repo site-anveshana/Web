@@ -63,5 +63,8 @@ if($result){
     </form>
 <?php
     }
+}else{
+        echo "<script>alert(\"USER NOT FOUND\")</script>";
+        header("refresh:0;url=users.php");
 }
 ?>

@@ -51,7 +51,7 @@
 					// header("refresh:0;url=index.php");
 
 		}
-	// header("refresh:0;url=../");
+	header("refresh:0;url=../");
 
 
 	

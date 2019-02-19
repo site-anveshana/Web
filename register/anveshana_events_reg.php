@@ -149,7 +149,7 @@ if($result){
 <h4 style="color:blue; font-weight: bold"> PAID:	
 
                 <?php
-                    $result = $dbobj->search('anveshana_transaction','*',"HTNO","'".$htno."'");
+                    $result = $dbobj->search('anveshana_transactions','*',"HTNO","'".$htno."'");
                     $sum = 0;
                     if($result){
                         while($row = $result->fetch_assoc()){
