@@ -37,6 +37,13 @@ function validate(){
     return false
   }
 
+  var email = form1["email"]
+
+  if(email.value == "" || email.value.match(/[A-z0-9]+@[A-z]\.[A-z]/)[0] !== email.value){
+    alert("Invalid Email address");
+    return false;
+  }
+
   if (document.form1.mobile.value.length !=10 )
   {
       alert("enter valid mobile number");

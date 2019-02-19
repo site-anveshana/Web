@@ -51,12 +51,7 @@
 
 	$dbc->connect();
 
-	$sql = "INSERT INTO anveshana_participants (HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )
-
-	                 VALUES ('$htno' ,'$fname', '$lname' , '$gender' , '$course' , '$department' , '$year' , '$college' ,'$email' ,'$mobile' )";
-
-
-		$data = $dbc->sqlQury($sql);
+		$data = $dbc->insert('anveshana_participants',"(HTNO, FIRSTNAME ,LASTNAME , GENDER , COURSE , DEPARTMENT , YEAR , COLLEGE , EMAIL , MOBILE )","('$htno' ,'$fname', '$lname' , '$gender' , '$course' , '$department' , '$year' , '$college' ,'$email' ,'$mobile')");
 
 		
 
@@ -66,18 +61,17 @@
 
 		    //echo "<script>alert(\"REGISTERED SUCCESFULLY\")</script>";
 
-			// header("refresh:0;url=anveshana_events_reg.php");
-
 			
 
 		} else {
 
-		    echo "<script>alert(\"Already Registered - Events participation can be updated during the program\")</script>";
+		    echo "<script>alert(\"Already Registered - Events participation can be updated Now\")</script>";
 
-			// header("refresh:0;url=../");
+			// header("refresh:0;url=index.php");
 
 		}
 
+		header("refresh:0;url=anveshana_events_reg.php");
 
 ?>
 

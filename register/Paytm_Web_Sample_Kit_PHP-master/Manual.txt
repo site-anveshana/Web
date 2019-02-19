@@ -1,0 +1,27 @@
+Manual Guide :
+------------------
+1. Firstly goto "lib" directory & open "config_paytm.php"
+2. For testing in "TEST" Environment keep PAYTM_ENVIRONMENT "TEST"
+3. Update PAYTM_MERCHANT_KEY, PAYTM_MERCHANT_MID and PAYTM_MERCHANT_WEBSITE
+
+Now checkout, I hope it will work
+
+
+How to get Transaction Status Response Code :-
+==============================================
+1. open "CHECK_TxnStatus.php" file
+2. update "Update Merchant ID", "Update OrderID" and "Update Merchant Key"
+3. now test in brouser, It will give you JsonData values like below
+
+JsonData={"TXNID" : "414709","BANKTXNID" : "","ORDERID" : "ORDER48886809916","TXNAMOUNT" : "1.00","STATUS" : "OPEN","TXNTYPE" : "SALE","GATEWAYNAME" : "","RESPCODE" : "","RESPMSG" : "","BANKNAME" : "","MID" : "klbGlV59135347348753","PAYMENTMODE" : "CC","REFUNDAMT" : "0.00","TXNDATE" : "2015-11-02 11:40:46.0"}
+
+Now it should be place in API like below : -
+--------------------------------------------
+https://pguat.paytm.com/oltp/HANDLER_INTERNAL/getTxnStatus?JsonData={"TXNID" : "414709","BANKTXNID" : "","ORDERID" : "ORDER48886809916","TXNAMOUNT" : "1.00","STATUS" : "OPEN","TXNTYPE" : "SALE","GATEWAYNAME" : "","RESPCODE" : "","RESPMSG" : "","BANKNAME" : "","MID" : "klbGlV59135347348753","PAYMENTMODE" : "CC","REFUNDAMT" : "0.00","TXNDATE" : "2015-11-02 11:40:46.0"}
+
+Now copy Above values with API, paste in browser address bar & press enter. It will return you Responce code for your transaction.
+
+Can send this response code paytm team to require live credential ..........
+
+Thank you!
+

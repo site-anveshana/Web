@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+      </script>
 <style type="text/css">
 	table {
     font-family: arial, sans-serif;
@@ -55,7 +57,7 @@ tr:nth-child(even) {
 <body>
 
 <form class="  well form-horizontal"  name="form2" action="anveshana_reg_com.php" method="post"  id="contact_form" onsubmit="return validate()">
-<div class="form-group">
+<div class="form-group" id ="content">
 <div class="row" id="content0">
 		
 <?php
@@ -73,44 +75,31 @@ $dbobj->connect();
 $result = $dbobj->search('anveshana_events','*',1,1);
 
 if($result){
-    $count = 0;
-    $x = 0;
-    $a = 0;
+    echo "<script>var a = 0;";
     while($row = $result->fetch_assoc()){
-
-        echo "<script>";
-
             echo "if(document.getElementById('".$row['event_type']."')){";
-                echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>\'';
+                echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'"  value="'.$row['event_id'].'" >'.$row['event_name'].'</td></tr>\'';
             echo "}";
-            echo "else{";
-                echo "var x = document.createElement('table');";
-                echo "x.id='".$row['event_type']."';";
-                echo "x.className ='col-lg-4 col-sm-6 col-md-12';";
-                if($dept != $row['event_type']){
-                    if($row['event_type'] != 'CENTRAL' && $row['event_type'] != 'CULTURAL' && $row['event_type'] != 'SPORTS'){
-                        echo "x.style='display:none;';";
-                        $x = 1;
-                    }
-                }
-                echo "document.getElementById('content".$a."').appendChild(x);";
-                echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr>    <td colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></td></tr class="checkbox-grid">\';';
-                echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>\';';
-            echo "}";
-
-        echo "</script>";
-        if($x == 1){
-            $count += 1;
-            if ($count%3 == 0){
-                echo "</div>";
-                $a += 1;
-                echo "<div class='row' id='content".$a."'>";
+            if($dept == $row['event_type'] || $row['event_type'] == 'CENTRAL' || $row['event_type'] == 'CULTURAL' || $row['event_type'] == 'SPORTS'){
+                echo "else{";
+                    echo "var x = document.createElement('table');";
+                    echo "x.id='".$row['event_type']."';";
+                    echo "x.className ='col-lg-4 col-sm-6 col-md-12';";
+                    echo "if((document.getElementsByTagName('table').length)%3 == 0){";
+                        echo "a += 1;";
+                        echo "var div = document.createElement('div');div.className = 'row';div.id='content'+a;";
+                        echo "document.getElementById('content').appendChild(div);";
+                    echo "}";
+                    echo "document.getElementById('content'+a).appendChild(x);";
+                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr> <td colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></td></tr class="checkbox-grid">\';';
+                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'" value="'.$row['event_id'].'" >'.$row['event_name'].'</td></tr>\';';
+                echo "}";
             }
-            $x = 0;
-        }
 
         // $event_details .= '<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>';
     }
+    
+    echo "</script>";
 }
 
 ?>
@@ -123,6 +112,21 @@ if($result){
           REGISTER  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
 </form>
+
+<?php
+
+    $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
+
+    if($result){
+        echo "<script>";
+        while($row = $result->fetch_assoc()){
+            echo "if(document.getElementById('".$row['event_id']."')){";
+                echo "document.getElementById('".$row['event_id']."').checked = true;";
+            echo "}";
+        }
+        echo "</script>";
+    }
+?>
      
 </body>
 </html>

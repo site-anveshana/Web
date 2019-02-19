@@ -16,6 +16,8 @@
 	
 	$data = "";
 
+	$dbc->sqlQury("DELETE FROM `anveshana_registration` WHERE HTNO='$htno'");
+
 	$result = $dbc->search('anveshana_events','*',1,1);
 
 	if($result)
@@ -35,7 +37,7 @@
 		} 
 	 	if ($data) {			
 
-					echo "<script>alert(\"REGISTERED SUCCESFULLY\")</script>";
+					echo "<script>alert(\"EVENTS UPDATED SUCCESFULLY\")</script>";
 
 					// header("refresh:0;url=../");
 
@@ -43,12 +45,12 @@
 
 				} else {
 
-					echo "<script>alert(\"Already Registered\")</script>";
+					echo "<script>alert(\"EVENTS UPDATION FAILED TRY AGIAN....\")</script>";
 
 					// header("refresh:0;url=index.php");
 
 		}
-	// header("refresh:0;url=../");
+	header("refresh:0;url=../");
 
 
 	

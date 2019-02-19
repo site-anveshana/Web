@@ -19,7 +19,7 @@
         // }
         // else{
             $result = $dbobj->insert('anveshana_events',"(`event_name`, `event_type`, `event_cost`, `created_by`)",
-            '("'.ucwords($_POST['event_name']).'", "'.$_POST['event_type'].'", "'.$_POST['event_cost'].'","'.$_SESSION['anveshana_username'].'")');
+            '(upper("'.$_POST['event_name'].'"), "'.$_POST['event_type'].'", "'.$_POST['event_cost'].'","'.$_SESSION['anveshana_username'].'")');
 
             
             echo '<script>alert("Event Creation Successful");</script>';
