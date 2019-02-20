@@ -76,26 +76,28 @@
 								$result = $dbobj->search('anveshana_events',"*",1,1);
 
 								while($r = $result->fetch_assoc()){
-									echo "<tr>";
-									echo "<td>".$r["event_name"]."</td>";
 									$res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"])->fetch_assoc()['SUM(amount)'];
 									$res2 = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)","event_id",$r["event_id"])->fetch_assoc()['COUNT(DISTINCT HTNO)'];
 									if($res){
+										
+										echo "<tr>";
+										echo "<td>".$r["event_name"]."</td>";
 										echo "<script>
 										events[events.length]={name:".$r["event_name"].",cost:".$res.",members:".$res2."}
 										</script>";
 										echo "<td>".$res."</td>";
 										
 										echo "<td>".$res2."</td>";
+										
+										echo "</tr>";
 									}else{
 										echo "<script>
 										events[events.length]={name:".$r["event_name"].",cost:0,members:0}
 										</script>";
-										echo "<td>0</td>";
+										// echo "<td>0</td>";
 										
-										echo "<td>0</td>";
+										// echo "<td>0</td>";
 									}
-									echo "</tr>";
 								}
 							
 							?>
