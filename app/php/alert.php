@@ -27,19 +27,17 @@
 
     if($result)
         while($row = $result->fetch_assoc()){
-            echo "abc";
             $result2 = $dbobj->search('anveshana_participants',"*","HTNO",'upper("'.$row['HTNO'].'")');
             if($result2){
                 if($row1 = $result2->fetch_assoc()){
                     $x = ($dbobj->search('anveshana_events',"event_name","event_id",$_POST['event_id']))->fetch_assoc()["event_name"];
                     alert($row1,$_POST['msg'],$x);
-                    echo "abc";
                 }
             }
 
         }
 
-    echo '<script>alert("Message Sent.");</script>';
+    echo '<script>alert("Message Sent. ");</script>';
     echo "<script>window.top.location='../alert.php'</script>";
 
 ?>

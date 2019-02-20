@@ -117,6 +117,9 @@
             while($row = $result->fetch_assoc()){
                 echo "if(document.getElementById('".$row['event_id']."')){";
                     echo "document.getElementById('".$row['event_id']."').checked = true;";
+                    if($row["status"]){   
+                        echo "document.getElementById('".$row['event_id']."').disabled = true;";
+                    }
                     $req_amnt += $row['amount'];
                 echo "}";
             }

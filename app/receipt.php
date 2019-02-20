@@ -96,7 +96,7 @@
 			<?php
 			
 			while($row = $result->fetch_assoc()){
-				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id='".$row['event_id']."' order by timestamp");
+				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id=".$row['event_id']." and status=1 order by timestamp");
 				if($result2)
 				if($result2->num_rows > 0)
 				if($row2 = $result2->fetch_assoc()){

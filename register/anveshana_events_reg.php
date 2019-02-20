@@ -153,7 +153,7 @@ if($result){
                     $sum = 0;
                     if($result){
                         while($row = $result->fetch_assoc()){
-                            $sum += $row["amount_paid"];
+                            $sum += $row["amount"];
                         }
                     }
                     echo "₹".$sum;
@@ -171,6 +171,10 @@ if($result){
         while($row = $result->fetch_assoc()){
             echo "if(document.getElementById('".$row['event_id']."')){";
                 echo "document.getElementById('".$row['event_id']."').checked = true;";
+                // echo $row["status"];
+                if($row["status"]){   
+                    echo "document.getElementById('".$row['event_id']."').disabled = true;";
+                }
             echo "}";
         }
         echo "</script>";

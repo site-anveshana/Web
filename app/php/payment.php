@@ -24,14 +24,20 @@
 
 		while($row = $result->fetch_assoc()){
 			
-				if(isset($_POST[$row["event_id"]]))
-				{
-                    $data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status)','("'.$htno.'" ,"'.$row["event_id"].'","'.$row["event_cost"].'",1)');
-                    
+				if(isset($_POST[$row["event_id"]])){
+					$data = $dbc->update('anveshana_registration','status',1,"htno","'".$htno."' and event_id=".$row["event_id"]."");
+						
                     if(!$data){
-                        $dbc->update('anveshana_registration','status',1,"htno","'".$htno."' and event_id='".$row["event_id"]."");
-                    }else{
-                        echo "<script>console.log(\"..ERROR..\")</script>";
+                    	$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status)',"('".$htno."' ,'".$row["event_id"]."',".$row["event_cost"].",1)");
+						if($data){
+							echo "<script>console.log(\"..INSERTING..\")</script>";
+						}else{
+							
+							echo "<script>console.log(\"..FAILED..\")</script>";
+						}
+					
+					}else{
+                        echo "<script>console.log(\"..UPDATED..\")</script>";
                     }
 					
                 }else
@@ -59,7 +65,7 @@
 
 	$ch = curl_init();
 	curl_setopt($ch,CURLOPT_URL,$data);
-	$response = curl_exec($ch);
+	// $response = curl_exec($ch);
 	curl_close($ch);
     echo "<script>alert(\"TRANSACTION COMPLETED\")</script>";
 	header("refresh:0;url=../receipt.php");

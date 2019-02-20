@@ -88,7 +88,7 @@
 
             $sqlQry = "INSERT INTO ".$tableName." ".$columnNames." VALUES ".$values.";";
 
-           // echo "<script>console.log('".$sqlQry."')</script>";
+           echo "<script>console.log('".$sqlQry."')</script>";
 
             if($this->conn->query($sqlQry) === True){
                // echo "<script>console.log('Inserted Successfully.')</script>";
@@ -111,7 +111,7 @@
             }
             
 
-           // echo "<script>console.log('".$sqlQry."')</script>";
+           echo "<script>console.log('".$sqlQry."')</script>";
             
             if($this->conn->query($sqlQry) === True){
                // echo "<script>console.log('Updated Successfully.')</script>";
