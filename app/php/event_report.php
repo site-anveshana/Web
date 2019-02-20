@@ -50,7 +50,12 @@
 $result = $dbobj->search('anveshana_events',"*",1,1);
 
 while($r = $result->fetch_assoc()){
-    $res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"])->fetch_assoc()['SUM(amount)'];
+    $res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"]." status=1");
+    if($res)
+        if($a= $res->fetch_assoc()['SUM(amount)']){
+            echo $a;
+        }else
+            echo "0";
     $res2 = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)","event_id",$r["event_id"])->fetch_assoc()['COUNT(DISTINCT HTNO)'];
 									if($res){
 										

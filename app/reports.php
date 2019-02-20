@@ -40,14 +40,17 @@
 		<table id="headings">
 								<tr>
 									<th>TOTAL REGISTRATIONS : <?php
-												$result = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)",1,1);
+												$result = $dbobj->search('anveshana_participants',"COUNT(DISTINCT HTNO)",1,1);
 												if($result)
 												echo $result->fetch_assoc()["COUNT(DISTINCT HTNO)"];
 									?></th>
 									<th>TOTAL INCOME : <?php
-											$result = $dbobj->search('anveshana_registration',"SUM(amount)",1,1);
+											$result = $dbobj->search('anveshana_registration',"SUM(amount)","status",1);
 											if($result)
-											echo $result->fetch_assoc()["SUM(amount)"];
+												if($a = $result->fetch_assoc()["SUM(amount)"])
+													echo $a;
+												else
+													echo "0";
 									
 									?></th>
 								</tr>

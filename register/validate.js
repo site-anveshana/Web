@@ -2,11 +2,11 @@ function validate(){
   var form1 = document.forms["form1"]
 
   var htno = form1["htno"]
-  if(htno.value.length!=10 || htno.value.match(/[0-9]{2}[A-z0-9]{2}[A-z0-9]+/)[0] !== htno.value){
-      htno.focus();
-      alert('Invalid Reg.No')
-      return false;
-  }
+  // if(htno.value.length!=10 || htno.value.match(/[0-9]{2}[A-z0-9]{2}[A-z0-9]+/)[0] !== htno.value){
+  //     htno.focus();
+  //     alert('Invalid Reg.No')
+  //     return false;
+  // }
 
   htno.value = htno.value.toUpperCase()
 
