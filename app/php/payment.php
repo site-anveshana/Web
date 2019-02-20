@@ -17,18 +17,25 @@
     $total = 0;
 
     $dbc->insert('anveshana_transactions','(HTNO,transaction_id, amount)','("'.$htno.'","'.$_SESSION["anveshana_username"].'" ,"'.$_POST['req'].'")');
-
+	$tr = false;
+	$result = $dbc->search('anveshana_transactions',"*",'HTNO',"'".$htno."' and transaction_id='".$_SESSION["anveshana_username"]."' ORDER BY transaction DESC");
+	if($result){
+		$tr = $result->fetch_assoc()["transaction"];
+		// echo $tr;
+	}
     $result = $dbc->search('anveshana_events','*',1,1);
 
+	$amount = $_POST['req'];
 	if($result){
 		$arr = Array();
 		while($row = $result->fetch_assoc()){
-			
+				
 				if(isset($_POST[$row["event_id"]])){
 					$data = $dbc->update('anveshana_registration','status',1,"htno","'".$htno."' and event_id=".$row["event_id"]."");
-						
+					$data = $dbc->update('anveshana_registration','transaction',$tr,"htno","'".$htno."' and event_id=".$row["event_id"]."");
+					$amount -= $row["event_cost"];
                     if(!$data){
-                    	$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status)',"('".$htno."' ,".$row["event_id"].",".$row["event_cost"].",1)");
+                    	$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status,transaction)',"('".$htno."' ,".$row["event_id"].",".$row["event_cost"].",1,'".$tr."')");
 						if($data){
 							$arr[$row["event_id"]] = $row["event_id"];
 							echo "<script>console.log(\"..INSERTING..\")</script>";
@@ -52,7 +59,11 @@
 
 					// header("refresh:0;url=index.php");
 
-        }
+		}
+	if($amount >= 100){
+		$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status,transaction)',"('".$htno."' ,0,100,1,'".$tr."')");
+		$arr[$row["0"]] = 0;
+	}
     
     $result1 = $dbc->search('anveshana_participants','*',"HTNO","'".$htno."'");
     $row1 = $result1->fetch_assoc();
@@ -71,7 +82,7 @@
 	curl_close($ch);
 	// echo "<script>alert(\"TRANSACTION COMPLETED\")</script>";
 
-	$_SESSION["array"] = $arr;
+	$_SESSION["array"] = $tr;
 	$helper = array_keys($_SESSION);
         foreach ($helper as $key){
 			if($key != "array" && $key != "htno")

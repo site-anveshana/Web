@@ -10,108 +10,67 @@
 
 <body>
 
-    <div class="container">
-
-
-
-        <!-- Modal -->
-
-        <div class="" id="myModal" role="dialog">
-
-                <!-- Modal content-->
-
-                <div class="modal-content">
-
-
-                    <div class="modal-body" style="margin:0;">
-
-                    <form action="php/alert.php" name="events" method="post">
-                        <div class="row" style="display:none">
-
-                        <div class="col-md-4 col-lg-6 col-sm-6 form-group" >
-							<label>Financial: </label>
-
-							<input type="radio" class="form-control" name="type" onchange="" placeholder="Message">
-</div><div class="col-md-4 col-lg-6 col-sm-6 form-group" >
-                            <label>Event: </label>
-							<input type="radio" class="form-control" name="type" onchange="" placeholder="Message">
-                            </div>
-                        </div><style>
-#customers {
+		<div class="row" align="center"><div class="col-lg-1"></div>
+		<div class="col-lg-10">
+		<style>
+#headings {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#customers td, #customers th {
+#headings td, #headings th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#headings tr{background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+#headings tr:hover {background-color: black;color:white;}
 
-#customers th {
+#headings th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: red;
+  background-color: purple;
   color: white;
 }
 </style>
-                        <div class="row" id="customers" align="center">
-							<script>
-								var events = [];
-							</script>
-
-							<table>
+		
+		<table id="headings">
 								<tr>
-									<th>EVENT NAME</th>
-									<th>TOTAL INCOME(₹)</th>
-									<th>MEMEBERS</th>
+									<th>TOTAL REGISTRATIONS : <?php
+												$result = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)",1,1);
+												if($result)
+												echo $result->fetch_assoc()["COUNT(DISTINCT HTNO)"];
+									?></th>
+									<th>TOTAL INCOME : <?php
+											$result = $dbobj->search('anveshana_registration',"SUM(amount)",1,1);
+											if($result)
+											echo $result->fetch_assoc()["SUM(amount)"];
+									
+									?></th>
 								</tr>
-								<?php
+		</table>
+		</div><div class="col-lg-1"></div>
+		</div>
 
-								$result = $dbobj->search('anveshana_events',"*",1,1);
-
-								while($r = $result->fetch_assoc()){
-									$res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"])->fetch_assoc()['SUM(amount)'];
-									$res2 = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)","event_id",$r["event_id"])->fetch_assoc()['COUNT(DISTINCT HTNO)'];
-									if($res){
-										
-										echo "<tr>";
-										echo "<td>".$r["event_name"]."</td>";
-										echo "<script>
-										events[events.length]={name:".$r["event_name"].",cost:".$res.",members:".$res2."}
-										</script>";
-										echo "<td>".$res."</td>";
-										
-										echo "<td>".$res2."</td>";
-										
-										echo "</tr>";
-									}else{
-										echo "<script>
-										events[events.length]={name:".$r["event_name"].",cost:0,members:0}
-										</script>";
-										// echo "<td>0</td>";
-										
-										// echo "<td>0</td>";
-									}
-								}
-							
-							?>
-
-							</table>
-                            
-						</div>
-                    </form>
-                    </div>
-
-                </div>
-
-
-        </div>
+    <div class="row">
+			<div class="col-lg-4">
+			<?php
+				include("php/event_report.php");
+			?>
+			</div>
+			<div class="col-lg-4">
+			<?php
+				include("php/dept_report.php");
+			?>
+			</div>
+			<div class="col-lg-4">
+			<?php
+				include("php/clg_report.php");
+			?>
+			</div>
 
     </div>
 

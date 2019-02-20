@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2019 at 03:09 PM
+-- Generation Time: Feb 20, 2019 at 01:01 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -485,6 +485,7 @@ CREATE TABLE `anveshana_events` (
 --
 
 INSERT INTO `anveshana_events` (`event_id`, `event_name`, `event_type`, `event_cost`, `created_by`) VALUES
+(0, 'REGISTRATION', '', 100, ''),
 (1, 'TREASURE HUNT', 'CENTRAL', 100, '16K61A05G7'),
 (2, 'CRAZY ROCKET', 'CENTRAL', 100, '16K61A05G7'),
 (3, 'QUICK SAND', 'CENTRAL', 100, '16K61A05G7'),
@@ -552,13 +553,14 @@ INSERT INTO `anveshana_events` (`event_id`, `event_name`, `event_type`, `event_c
 (65, 'BUSINESS QUIZ', 'MS', 100, '16K61A05G7'),
 (66, 'BUSINESS PLAN', 'MS', 100, '16K61A05G7'),
 (67, 'AD-MAKING', 'MS', 100, '16K61A05G7'),
-(68, 'VOLLEY BALL', 'SPORTS', 900, '16K61A05G7'),
-(69, 'THROW BALL', 'SPORTS', 900, '16K61A05G7'),
-(70, 'TABLE TENNIS', 'SPORTS', 900, '16K61A05G7'),
-(71, 'TENNICOIT', 'SPORTS', 900, '16K61A05G7'),
-(72, 'CARROMS', 'SPORTS', 900, '16K61A05G7'),
-(73, 'CHESS', 'SPORTS', 900, '16K61A05G7'),
-(74, 'KABADDI', 'SPORTS', 900, '16K61A05G7');
+(68, 'VOLLEY BALL(TEAM)', 'SPORTS', 800, '16K61A05G7'),
+(69, 'THROW BALL(TEAM)', 'SPORTS', 800, '16K61A05G7'),
+(70, 'TABLE TENNIS', 'SPORTS', 100, '16K61A05G7'),
+(71, 'TENNICOIT', 'SPORTS', 100, '16K61A05G7'),
+(72, 'CARROMS', 'SPORTS', 100, '16K61A05G7'),
+(73, 'CHESS', 'SPORTS', 100, '16K61A05G7'),
+(74, 'KABADDI(TEAM)', 'SPORTS', 800, '16K61A05G7'),
+(75, 'TIK TOK', 'CENTRAL', 100, '16K61A05G7');
 
 -- --------------------------------------------------------
 
@@ -585,9 +587,11 @@ CREATE TABLE `anveshana_participants` (
 --
 
 INSERT INTO `anveshana_participants` (`HTNO`, `FIRSTNAME`, `LASTNAME`, `GENDER`, `COURSE`, `DEPARTMENT`, `YEAR`, `COLLEGE`, `EMAIL`, `MOBILE`, `timestamp`) VALUES
-('16K61A05G7', 'VIJAYA GOPINADH REDDY', 'VELAGALA', 'male', 'B.Tech', 'CSE', 'III', 'SASI INSTITUTE OF TECHNOLOGY AND ENGINEERING', 'gopinadh5g7@sasi.ac.in', '9949582550', '2019-02-16 07:22:27'),
-('CSE', '', '', '', '', '', '', '', '', '', '2019-02-16 11:38:24'),
-('ECE', '', '', '', '', '', '', '', '', '', '2019-02-16 11:38:40');
+('16K61A05G7', '', '', 'M', '', '', '', '', '', '', '2019-02-20 11:52:36'),
+('KIRAN', '', '', 'M', '', '', '', '', '', '', '2019-02-20 11:53:29'),
+('NARENDRA', '', '', 'M', '', '', '', '', '', '', '2019-02-20 11:53:09'),
+('RAVISHANKAR', '', '', 'M', '', '', '', '', '', '', '2019-02-20 11:53:21'),
+('SURENDRA', '', '', 'M', '', '', '', '', '', '', '2019-02-20 11:53:09');
 
 -- --------------------------------------------------------
 
@@ -600,6 +604,7 @@ CREATE TABLE `anveshana_registration` (
   `event_id` bigint(20) NOT NULL,
   `amount` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `transaction` bigint(20) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -646,13 +651,11 @@ INSERT INTO `anveshana_role_services` (`role_id`, `service_id`) VALUES
 (1, 4),
 (1, 5),
 (1, 7),
-(2, 1),
 (2, 2),
 (2, 3),
 (2, 7),
 (3, 5),
 (3, 7),
-(4, 7),
 (5, 4);
 
 -- --------------------------------------------------------
@@ -699,7 +702,7 @@ CREATE TABLE `anveshana_transactions` (
 --
 
 CREATE TABLE `anveshana_users` (
-  `username` varchar(10) NOT NULL,
+  `username` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL DEFAULT 'a48baea16e7e1194826a8a2366f84e6f',
   `role_id` bigint(20) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -710,9 +713,11 @@ CREATE TABLE `anveshana_users` (
 --
 
 INSERT INTO `anveshana_users` (`username`, `password`, `role_id`, `timestamp`) VALUES
-('16K61A05G7', '22c14f311a60486b36f79f3bc962be66', 1, '2019-02-16 07:24:19'),
-('CSE', 'aa6bfe8bcf6eb51f7e158d8e5101fb71', 2, '2019-02-16 11:38:59'),
-('ECE', '98defd6ee70dfb1dea416cecdf391f58', 3, '2019-02-16 11:38:59');
+('16K61A05G7', 'a48baea16e7e1194826a8a2366f84e6f', 1, '2019-02-20 11:54:03'),
+('KIRAN', 'a48baea16e7e1194826a8a2366f84e6f', 1, '2019-02-20 11:58:41'),
+('NARENDRA', 'a48baea16e7e1194826a8a2366f84e6f', 2, '2019-02-20 11:57:23'),
+('RAVISHANKAR', 'a48baea16e7e1194826a8a2366f84e6f', 4, '2019-02-20 11:58:33'),
+('SURENDRA', 'a48baea16e7e1194826a8a2366f84e6f', 3, '2019-02-20 11:57:31');
 
 --
 -- Indexes for dumped tables
@@ -781,13 +786,13 @@ ALTER TABLE `anveshana_users`
 -- AUTO_INCREMENT for table `anveshana_events`
 --
 ALTER TABLE `anveshana_events`
-  MODIFY `event_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `event_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `anveshana_roles`
 --
 ALTER TABLE `anveshana_roles`
-  MODIFY `role_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `role_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `anveshana_services`
@@ -799,7 +804,7 @@ ALTER TABLE `anveshana_services`
 -- AUTO_INCREMENT for table `anveshana_transactions`
 --
 ALTER TABLE `anveshana_transactions`
-  MODIFY `transaction` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `transaction` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

@@ -74,7 +74,19 @@
 
 			<ul class="nav navbar-nav navbar-right">
 			
-			<li class=" hello"><a href="home.php"><span class="glyphicon glyphicon-user"></span><?php echo ' HELLO '.$username;?></a></li>
+            <li class=" hello"><a href="home.php"><span class="glyphicon glyphicon-user"></span><?php echo ' HELLO '.$username; 
+            if($_SESSION["anveshana_role"] == "5"){
+                include_once('php/db_operations.php');
+                $dbobj = new DBConnect;
+                $dbobj->connect();
+                $result = $dbobj->search('anveshana_transactions',"SUM(amount)",'transaction_id',"'".$_SESSION["anveshana_username"]."'");
+                if($x = $result->fetch_assoc()["SUM(amount)"])
+                    echo " ₹".$x;
+                else
+                    echo " ₹0";
+            
+            }
+            ?></a></li>
 
             <?php
                 include('php/services.php');

@@ -112,7 +112,7 @@
         }
 
         $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
-        $req_amnt = 100;
+        $req_amnt = 0;
         if($result){
             while($row = $result->fetch_assoc()){
                 echo "if(document.getElementById('".$row['event_id']."')){";
@@ -135,6 +135,7 @@
     <h4 style="color:blue; font-weight: bold" id="req"> REQUIRED:	
 
                     <?php
+                    // echo $req_amnt;
                         $result = $dbobj->search('anveshana_transactions','*',"HTNO","upper('".$htno."')");
                         $sum = 0;
                         if($result){
@@ -142,6 +143,9 @@
                                 $sum += $row["amount"];
                             }
                         }
+
+                        echo "<script>sum = ".$sum.";document.form2.sum.value = sum;</script>";
+                    
                         $req_amnt = $req_amnt - $sum;
                         if($req_amnt < 0)
                             $req_amnt = 0;
@@ -157,8 +161,7 @@
                     <?php
                         echo "₹".$sum;
 
-                        echo "<script>sum = ".$sum.";document.form2.sum.value = sum;</script>";
-                    
+                        
                     ?>
     </h4>
                     </div>

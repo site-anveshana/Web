@@ -83,12 +83,13 @@
 			</tr>
 			<tr >
 				<td align="left">No:<?php echo $row3["transaction"]; ?></td>
-				<td align="center"><b>Original Copy</b></td>
-				<td align="left">Date:<?php echo substr($row3["timestamp"],0,10); ?></td>
+			 
+				<td align="right" colspan="2" >Date:<?php echo substr($row3["timestamp"],0,10); ?></td>
 			</tr>
 			<tr>
-				<td >Regd No.:<?php echo $row1["HTNO"]; ?></td>
-				<td align="center" colspan="2">Name:<?php echo $row1["FIRSTNAME"]; ?></td>
+				<td  align="left" colspan="3" >RNo.:<?php echo $row1["HTNO"]; ?></td> </tr>
+				<tr>
+				<td align="left" colspan="3">Name:<?php echo $row1["FIRSTNAME"]; ?></td>
 				
 			</tr>
 			<tr align="center">
@@ -97,11 +98,11 @@
 			<?php
 			// print_r($_SESSION["array"]);
 			while($row = $result->fetch_assoc()){
-				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id=".$row['event_id']." and status=1 order by timestamp");
+				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id=".$row['event_id']." and status=1 and transaction=".$_SESSION["array"]." order by timestamp");
 				if($result2)
 				if($result2->num_rows > 0)
 				if($row2 = $result2->fetch_assoc()){
-					if(isset($_SESSION["array"][$row["event_id"]])){
+					if($row2["event_id"] == $row["event_id"]){
 						echo "<tr>";
 						echo "<td colspan='2'>".$row['event_name'] ."</td>";
 						echo "<td>₹".$row['event_cost']."</td>";
@@ -111,7 +112,7 @@
 			}
 			?>
 			<tr>
-				<td colspan="3">Amount: ₹<?php echo $row3["amount"]; ?></td>
+				<td colspan="2">Total:</td><td> ₹<?php echo $row3["amount"]; ?></td>
 			</tr>
 			
 			<tr align="right">
@@ -122,7 +123,7 @@
 
 							</div>
 
-							<div class="row">
+							<!-- <div class="row">
 								<div align="center" class="noprint">
 
 								<div class="col-md-6 col-lg-4 col-sm-6 form-group" >
@@ -130,14 +131,16 @@
 							</div>
 							<div class="col-md-6 col-lg-4 col-sm-6 form-group">
 								<a href="payment.php"><button class="btn abtn">Go Back</button></a>
-                            </div>
+                            </div> -->
 								
 								</div>
 
 								<script>
-								function myFunction() {
+								
 									window.print();
-								}
+									setTimeout(function(){
+										window.top.location="payment.php";
+									},500);
 								</script>
 
 							</div>

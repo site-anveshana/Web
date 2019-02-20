@@ -168,7 +168,7 @@
     
             $sqlQry = "SELECT ".$columnNames." FROM ".$tableName." WHERE ".$findByColumnName."=".$fndByValue.";";
 
-           // echo "<script>console.log('".$sqlQry."')</script>";
+        //    echo "<script>console.log('".$sqlQry."')</script>";
             
             $result = $this->conn->query($sqlQry);
 
