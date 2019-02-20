@@ -61,7 +61,8 @@
 
 		}
 	if($amount >= 100){
-		$data = $dbc->insert('anveshana_registration','(HTNO, event_id, amount, status,transaction)',"('".$htno."' ,0,100,1,'".$tr."')");
+		$data = $dbc->update('anveshana_registration','status',1,"htno","'".$htno."' and event_id=0");
+		$data = $dbc->update('anveshana_registration','transaction',$tr,"htno","'".$htno."' and event_id=0");
 		$arr[$row["0"]] = 0;
 	}
     

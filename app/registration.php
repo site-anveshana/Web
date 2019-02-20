@@ -179,7 +179,7 @@
             document.getElementById('req').innerHTML = "REQUIRED: ₹"+(req-sum)
             
             document.form2.req.value = (req-sum);
-        }
+        }newCheck();
                         
     </script>
 

@@ -44,6 +44,8 @@
 
 	$mobile = $_POST['mobile'];
 
+	$_SESSION['mobile'] = $mobile;
+
 	$_SESSION['htno']=$htno;
 	$_SESSION['dept']=$department;
 	
@@ -56,20 +58,6 @@
 		
 
 		if ($data) {
-
-			$username = "sasicollege";
-			$password = "SITE2002";
-			$numbers = $mobile; // mobile number
-			$from = urlencode('INSITE'); // assigned Sender_ID
-			$raw_msg = $fname." ".$lname." , you have been successfully registered for SITE Anveshana 2K19\nCheck out sasi.ac.in/anveshana for more...";
-			$message = urlencode($raw_msg); // Message text required to deliver on mobile number
-			$data = "username="."$username"."&password="."$password"."&to="."$numbers"."&from="."$from"."&msg="."$message"."&type=1&dnd_check=0";
-			$data = "https://www.smsstriker.com/API/sms.php?".$data;
-
-			$ch = curl_init();
-			curl_setopt($ch,CURLOPT_URL,$data);
-			$response = curl_exec($ch);
-			curl_close($ch);
 
 			
 

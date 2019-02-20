@@ -70,6 +70,7 @@ tr:nth-child(even) {
 session_start();
 if(!isset($_SESSION['dept']) || !isset($_SESSION['htno'])){
     header("refresh:0;url=../reg.php");
+    die();
 }
 $dept = $_SESSION['dept'];
 $htno = $_SESSION['htno'];
@@ -87,7 +88,7 @@ if($result){
     echo "<script>var a = 0;";
     while($row = $result->fetch_assoc()){
             echo "if(document.getElementById('".$row['event_type']."')){";
-                echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'"  value="'.$row['event_id'].'" >'.$row['event_name'].'</td></tr>\'';
+                echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'"  value="'.$row['event_cost'].'" onclick="newCheck()">'.$row['event_name'].'</td></tr>\'';
             echo "}";
             if($dept == $row['event_type'] || $row['event_type'] == 'CENTRAL' || $row['event_type'] == 'CULTURAL' || $row['event_type'] == 'SPORTS'){
                 echo "else{";
@@ -101,7 +102,7 @@ if($result){
                     echo "}";
                     echo "document.getElementById('content'+a).appendChild(x);";
                     echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr> <th colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></th></tr class="checkbox-grid">\';';
-                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'" value="'.$row['event_id'].'" >'.$row['event_name'].'</td></tr>\';';
+                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'" value="'.$row['event_cost'].'" onclick="newCheck()">'.$row['event_name'].'</td></tr>\';';
                 echo "}";
             }
 
@@ -150,43 +151,78 @@ if($result){
         </div>
 
 </form>
-
-<div class="row" align="center">
-<h4 style="color:blue; font-weight: bold"> PAID:	
-
-                <?php
-                    $result = $dbobj->search('anveshana_transactions','*',"HTNO","'".$htno."'");
-                    $sum = 0;
-                    if($result){
-                        while($row = $result->fetch_assoc()){
-                            $sum += $row["amount"];
-                        }
-                    }
-                    echo "₹".$sum;
-                
-                ?>
-
-</h4>
-            </div>
 <?php
 
-    $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
-
-    if($result){
         echo "<script>";
-        while($row = $result->fetch_assoc()){
-            echo "if(document.getElementById('".$row['event_id']."')){";
-                echo "document.getElementById('".$row['event_id']."').checked = true;";
-                // echo $row["status"];
-                if($row["status"]){   
-                    echo "document.getElementById('".$row['event_id']."').disabled = true;";
-                }
-            echo "}";
-        }
-        echo "</script>";
+$result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
+$req_amnt = 0;
+if($result){
+    while($row = $result->fetch_assoc()){
+        echo "if(document.getElementById('".$row['event_id']."')){";
+            echo "document.getElementById('".$row['event_id']."').checked = true;";
+            if($row["status"]){   
+                echo "document.getElementById('".$row['event_id']."').disabled = true;";
+            }
+            $req_amnt += $row['amount'];
+        echo "}";
     }
+}   
+    echo "</script>";
 ?>
-     
+         <div class="row" align="center">
+    <div class="col-lg-6 col-sm-12">
+    <h4 style="color:blue; font-weight: bold" id="req"> REQUIRED:	
+                    
+                    <?php
+                    // echo $req_amnt;
+                        $result = $dbobj->search('anveshana_transactions','*',"HTNO","upper('".$htno."')");
+                        $sum = 0;
+                        if($result){
+                            while($row = $result->fetch_assoc()){
+                                $sum += $row["amount"];
+                            }
+                        }
+                    
+                        $req_amnt = $req_amnt - $sum;
+                        if($req_amnt < 0)
+                            $req_amnt = 0;
+                        echo "₹".$req_amnt;
+                    
+                    ?>
+
+    </h4>
+</div>
+<div class="col-lg-6 col-sm-12">
+    <h4 style="color:blue; font-weight: bold"> PAID:	
+
+                    <?php
+                        echo "₹".$sum;
+                        echo "<script>sum = ".$sum.";</script>";
+                        
+                    ?>
+    </h4>
+                    </div>
+                </div>
+
+    <script>
+        function newCheck(){
+            var x = document.getElementsByTagName('input')
+            var req = 100;
+            for(var i=0;i<x.length;i++){
+                if(x[i].checked){
+                    req += parseInt(x[i].value)
+                }
+            }
+            document.getElementById('req').innerHTML = "REQUIRED: ₹"+(req-sum)
+            
+            // document.form2.req.value = (req-sum);
+        }newCheck();
+                        
+    </script>
+
+<div class="row" align="center">
+    <h4 style="color:red; font-weight: bold" id="req"> ONLY CAPTAIN NEED TO REGISTER FOR TEAM EVENTS</h4>
+</div>
      <!-- <marquee behavior="alternate" style="color:red;font-size:12px">Payment will not be refunded once done...</marquee> -->
 </body>
 </html>
