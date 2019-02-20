@@ -56,7 +56,7 @@
 
 <body>
 	
-    <nav class="navbar navbar-default change-nav" style="margin-bottom:6%;">
+    <nav class="navbar navbar-default change-nav" style="margin-bottom:3%;">
         <style>
             li{
                 margin-bottom:10px;

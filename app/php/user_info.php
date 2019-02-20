@@ -6,7 +6,6 @@ $dbobj = new DBConnect;
 $dbobj->connect();
 
 $result = $dbobj->search('anveshana_participants',"*",'htno','"'.$_SESSION['anveshana_user_htno'].'"');
-
 if($result){
     if($row = $result->fetch_assoc()){
         // print_r($row);
@@ -15,9 +14,9 @@ if($result){
 <div class="row">
 
 <div class="col-md-12 col-lg-12 col-sm-12 form-group" >
-    <label>Hall Ticket: </label>
+    <label>Username: </label>
 
-    <input type="text" class="form-control" name="htno" value="<?php echo strtoupper($row['HTNO']); ?>" placeholder="Register Number">
+    <input type="text" class="form-control" name="htno" value="<?php echo strtoupper($row['HTNO']); ?>" placeholder="Username">
     </div>
 </div>
 <div class="row">
@@ -41,6 +40,7 @@ if($result){
 
         <input type="text" class="form-control" disabled name="email" value="<?php echo $row['EMAIL']?>" placeholder="Email">
     </div>
+    
 </div>
 
 <div class="row">
@@ -54,6 +54,13 @@ if($result){
                 ?>          
         </select>
         
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3 col-lg-6 col-sm-6 form-group" >
+    <input type="checkbox" name="reset_pwd" value="1">
+        <label>Reset Password </label>
     </div>
 </div>
 <div class="row"></div>

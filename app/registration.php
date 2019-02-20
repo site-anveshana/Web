@@ -180,3 +180,9 @@
                         
     </script>
 
+<div class="row" align="center">
+    <h4 style="color:red; font-weight: bold" id="req"> ONLY CAPTAIN NEED TO REGISTER FOR TEAM EVENTS</h4>
+</div>
+
+
+

@@ -259,9 +259,13 @@ label{
     margin: 20px 0 20px 0;
 }
 
+.row>div{
+    padding:1px;
+}
+
 p{
     font-size:10px;
 }
 .container{
-    margin-top:200px; 
+    margin-top:0.8%; 
 }

@@ -10,7 +10,7 @@
 
     <title>Change Password - Anveshana</title>
 
-    <script src="script.js?1.0"></script>
+    <script src="script.js?2.0"></script>
 
 </head>
 

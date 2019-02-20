@@ -75,7 +75,7 @@
 
 		} else {
 
-		    echo "<script>alert(\"Already Registered - Events participation can be updated Now\")</script>";
+		    // echo "<script>alert(\"Already Registered - Events participation can be updated Now\")</script>";
 
 			// header("refresh:0;url=index.php");
 

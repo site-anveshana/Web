@@ -38,12 +38,18 @@
 	font-size:12px;
     border-collapse: collapse;
     width:60%;
+    margin:0.5;
 
 }
 
-td, th {
+th{
     border: 1px solid #dddddd;
     text-align: center;
+    padding: 8px;
+}
+td {
+    border: 1px solid #dddddd;
+    /* text-align: center; */
     padding: 8px;
 }
 
@@ -94,7 +100,7 @@ if($result){
                         echo "document.getElementById('content').appendChild(div);";
                     echo "}";
                     echo "document.getElementById('content'+a).appendChild(x);";
-                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr> <td colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></td></tr class="checkbox-grid">\';';
+                    echo 'document.getElementById("'.$row['event_type'].'").innerHTML = \'<tr> <th colspan="6" ><h4 style="color:red; font-weight: bold"> '.$row['event_type'].' EVENTS	</h4></th></tr class="checkbox-grid">\';';
                     echo 'document.getElementById("'.$row['event_type'].'").innerHTML += \'<tr><td><input type="checkbox" name='.$row['event_id'].' id="'.$row['event_id'].'" value="'.$row['event_id'].'" >'.$row['event_name'].'</td></tr>\';';
                 echo "}";
             }
@@ -110,7 +116,7 @@ if($result){
 <div class="row form-group"></div>
 <!-- Register  Button -->
       <div class="row form-group" align="center">
-            <div class="col-lg-2 col-sm-12">
+            <div class="col-lg-12 col-sm-12">
             <button type="submit" class="btn btn-warning">
             REGISTER NOW</button>
             </div>
@@ -136,11 +142,11 @@ if($result){
                 
             </script>
 
-            <div class="col-lg-2 col-sm-12">
+            <!-- <div class="col-lg-2 col-sm-12">
             <button type="submit" class="btn btn-warning" >
                 <a href="index.php" style="text-decoration:none;color:white;">
             CANCEL </a></button>
-            </div>
+            </div> -->
         </div>
 
 </form>

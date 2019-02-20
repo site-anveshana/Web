@@ -2,9 +2,9 @@
     <div class="row">
 
         <div class="col-md-12 col-lg-12 col-sm-12 form-group" >
-            <label>Hall Ticket: </label>
+            <label>Username: </label>
 
-            <input type="text" class="form-control" name="htno" placeholder="Register Number">
+            <input type="text" class="form-control" name="htno" placeholder="Username">
             </div>
         </div>
         <div class="row">
@@ -16,9 +16,9 @@
 <script>
     function validate(){
         var htno = document.users.htno
-        if(htno.value.length!=10){
+        if(htno.value == ""){
             htno.focus();
-            alert('Invalid Reg.No')
+            alert('Invalid Username')
             return false;
         }
     }

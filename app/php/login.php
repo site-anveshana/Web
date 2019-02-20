@@ -27,15 +27,15 @@
             }
             else{
                 echo '<img src="../img/wrong.png" alt="" width="70%">';
-                header( "refresh:2;url=../index.html" );
+                header( "refresh:1;url=../index.html" );
 
             }
         }
         else
-            header( "refresh:2;url=../index.html" );
+            header( "refresh:1;url=../index.html" );
     } else {
         echo '<img src="../img/wrong.png" alt="" width="70%">';
-        header( "refresh:2;url=../index.html" );
+        header( "refresh:1;url=../index.html" );
     }
 
 ?>

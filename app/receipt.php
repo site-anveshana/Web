@@ -39,7 +39,8 @@
 			$result = $dbobj->search('anveshana_events','*',1,1);
 
 			if(!$result1 || !$result2 || !$result3 || !$result){
-				// header("refresh:0;url=payment.php");
+				header("refresh:0;url=payment.php");
+				die();
 			}
 			$row1 = $result1->fetch_assoc();
 			$row3 = $result3->fetch_assoc();
@@ -94,18 +95,18 @@
 				<td colspan="3"><hr></td>
 			</tr>
 			<?php
-			
+			// print_r($_SESSION["array"]);
 			while($row = $result->fetch_assoc()){
 				$result2 = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."' and event_id=".$row['event_id']." and status=1 order by timestamp");
 				if($result2)
 				if($result2->num_rows > 0)
 				if($row2 = $result2->fetch_assoc()){
-					// if($row2["event_id"] == $value){
+					if(isset($_SESSION["array"][$row["event_id"]])){
 						echo "<tr>";
 						echo "<td colspan='2'>".$row['event_name'] ."</td>";
-						echo "<td>".$row['event_cost']."</td>";
+						echo "<td>₹".$row['event_cost']."</td>";
 						echo "<tr>";
-					// }
+					}
 				}
 			}
 			?>

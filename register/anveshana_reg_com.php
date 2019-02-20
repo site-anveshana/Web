@@ -2,9 +2,13 @@
 
 	session_start();
 
-	ob_start();
-
 	include_once("db_operations.php");
+
+	if(!isset($_SESSION['htno'])){
+		
+		header("refresh:0;url=index.php");
+		die();
+	}
 	
 	$htno = $_SESSION['htno'];
 		
@@ -16,7 +20,7 @@
 	
 	$data = "";
 
-	$dbc->sqlQury("DELETE FROM `anveshana_registration` WHERE HTNO='$htno'");
+	$dbc->delete("anveshana_registration","HTNO","'".$htno."'");
 
 	$result = $dbc->search('anveshana_events','*',1,1);
 
@@ -38,7 +42,7 @@
 		} 
 	 	if ($data) {			
 
-					echo "<script>alert(\"EVENTS UPDATED SUCCESFULLY\")</script>";
+					// echo "<script>alert(\"EVENTS UPDATED SUCCESFULLY\")</script>";
 
 					// header("refresh:0;url=../");
 
@@ -46,11 +50,16 @@
 
 				} else {
 
-					echo "<script>alert(\"EVENTS UPDATION FAILED TRY AGIAN....\")</script>";
+					// echo "<script>alert(\"EVENTS UPDATION FAILED TRY AGIAN....\")</script>";
 
 					// header("refresh:0;url=index.php");
 
 		}
+	$helper = array_keys($_SESSION);
+	foreach ($helper as $key){
+		unset($_SESSION[$key]);
+	}
+	session_destroy();
 	header("refresh:0;url=../");
 
 

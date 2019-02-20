@@ -1,6 +1,12 @@
 <?php
 
     include('template/index.php');
+
+    $helper = array_keys($_SESSION);
+    foreach ($helper as $key){
+        if($key != "anveshana_username" && $key != "anveshana_role")
+        unset($_SESSION[$key]);
+    }
 ?>
 <!DOCTYPE html>
 

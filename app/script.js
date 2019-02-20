@@ -1,4 +1,3 @@
-sessionStorage.removeItem('anveshana_username');
 function validate(){
     if (log.user.value == "") {
         alert("Please enter username");
@@ -44,4 +43,5 @@ function validatepwd(){
         pwd.focus()
         return false
     }
+    sessionStorage.removeItem('anveshana_username');
 }
