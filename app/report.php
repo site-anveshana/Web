@@ -87,7 +87,7 @@
 											echo '<option value="" checked>---</option>';
 											if($result){
 													while($row = $result->fetch_assoc())
-															echo '<option value="'.$row['event_id'].'">'.$row['event_name'].'</option>';
+															echo '<option value="'.$row['event_id'].'">'.$row['event_name'].' --> '.$row['event_type'].'</option>';
 											}
 										
 										?>
