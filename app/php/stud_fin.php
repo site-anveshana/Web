@@ -35,48 +35,36 @@
 </style>
                         <div class="row" id="customers" align="center">
 							<script>
-								var events = [];
+								var dept = [];
 							</script>
 
 							<table>
 								<tr>
-									<th>EVENT NAME</th>
-									<th>TOTAL INCOME(₹)</th>
+									<th>USERNAME</th>
+									<th>INCOME (₹)</th>
 									<th>MEMEBERS</th>
 								</tr>
 								<?php
-
-								
-$result = $dbobj->search('anveshana_events',"*",1,1);
-
-while($r = $result->fetch_assoc()){
-    $res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"]." and status=1");
-    if($res)
-        if($a= $res->fetch_assoc()['SUM(amount)']){
-            echo "";
-        }else
-            echo "";
-    $res2 = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)","event_id",$r["event_id"])->fetch_assoc()['COUNT(DISTINCT HTNO)'];
-									if($res && $a>0){
-										
+								include_once('db_operations.php');
+$dbobj = new DBConnect;
+$dbobj->connect();
+										$result = $dbobj->search('anveshana_transactions',"SUM(amount),transaction_id,COUNT(transaction)",1,"1 GROUP BY transaction_id");
+										if($result)
+										while($r = $result->fetch_assoc()){
+												if($r["SUM(amount)"]=="")
+													continue;
+									
 										echo "<tr>";
-										echo "<td>".$r["event_name"]."</td>";
-										echo "<script>
-										events[events.length]={name:'".$r["event_name"]."',cost:".$a.",members:".$res2."}
-										</script>";
-										echo "<td>".$a."</td>";
+										echo "<td>".$r["transaction_id"]."</td>";
+										// echo "<script>
+										// dept[dept.length]={name:'".$r["COLLEGE"]."',members:".$r["COUNT(DISTINCT HTNO)"]."}
+										// </script>";
+										echo "<td>".$r["SUM(amount)"]."</td>";
 										
-										echo "<td>".$res2."</td>";
+										echo "<td>".$r["COUNT(transaction)"]."</td>";
 										
 										echo "</tr>";
-									}else{
-										echo "<script>
-										events[events.length]={name:'".$r["event_name"]."',cost:0,members:0}
-										</script>";
-										// echo "<td>0</td>";
-										
-										// echo "<td>0</td>";
-									}
+			
 								}
 							
 							?>

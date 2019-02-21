@@ -1,4 +1,5 @@
-<form action="php/alert.php" name="events" method="post">
+
+<form action="#" name="events" method="post">
                         <div class="row" style="display:none">
 
                         <div class="col-md-4 col-lg-6 col-sm-6 form-group" >
@@ -10,10 +11,19 @@
 							<input type="radio" class="form-control" name="type" onchange="" placeholder="Message">
                             </div>
                         </div><style>
+												html,body {    
+    height:100%;
+    margin: 0;
+}
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+	display: block;
+	max-height: 100%;
+	position:relative;
+	overflow-y: auto;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 #customers td, #customers th {
@@ -38,35 +48,39 @@
 								var events = [];
 							</script>
 
-							<table>
+							<table max-height="100%">
 								<tr>
 									<th>EVENT NAME</th>
-									<th>TOTAL INCOME(₹)</th>
+									<th>INCOME(₹)</th>
 									<th>MEMEBERS</th>
 								</tr>
 								<?php
-
+include_once('db_operations.php');
+$dbobj = new DBConnect;
+$dbobj->connect();
 								
 $result = $dbobj->search('anveshana_events',"*",1,1);
 
 while($r = $result->fetch_assoc()){
-    $res = $dbobj->search('anveshana_registration',"SUM(amount)","event_id",$r["event_id"]." and status=1");
-    if($res)
-        if($a= $res->fetch_assoc()['SUM(amount)']){
-            echo "";
-        }else
-            echo "";
-    $res2 = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO)","event_id",$r["event_id"])->fetch_assoc()['COUNT(DISTINCT HTNO)'];
-									if($res && $a>0){
-										
+		$res= FALSE;
+		// if(isset($_GET["i"])){
+		// 	if($_GET["i"] == 1){
+				// echo $_GET["i"];
+				$res = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO),SUM(amount)","event_id",$r["event_id"]." and status=1");
+		// 	}
+		// }
+		// if(!$res){$res = $dbobj->search('anveshana_registration',"COUNT(DISTINCT HTNO),SUM(amount)","event_id",$r["event_id"]);}
+									if($res)
+										if($res2 = $res->fetch_assoc()){
+											if($res2["COUNT(DISTINCT HTNO)"] < 1 )
+												continue;
 										echo "<tr>";
 										echo "<td>".$r["event_name"]."</td>";
 										echo "<script>
-										events[events.length]={name:'".$r["event_name"]."',cost:".$a.",members:".$res2."}
+										events[events.length]={name:'".$r["event_name"]."',members:".$res2["COUNT(DISTINCT HTNO)"]."}
 										</script>";
-										echo "<td>".$a."</td>";
-										
-										echo "<td>".$res2."</td>";
+										echo "<td>".$res2["SUM(amount)"]."</td>";
+										echo "<td>".$res2["COUNT(DISTINCT HTNO)"]."</td>";
 										
 										echo "</tr>";
 									}else{

@@ -108,7 +108,7 @@ if($result){
 
         // $event_details .= '<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>';
     }
-    
+    echo "document.getElementById('0').checked = true;document.getElementById('0').disabled = true;";
     echo "</script>";
 }
 
@@ -160,7 +160,7 @@ if($result){
     while($row = $result->fetch_assoc()){
         echo "if(document.getElementById('".$row['event_id']."')){";
             echo "document.getElementById('".$row['event_id']."').checked = true;";
-            if($row["status"]){   
+            if($row["status"] == 1){   
                 echo "document.getElementById('".$row['event_id']."').disabled = true;";
             }
             $req_amnt += $row['amount'];
@@ -168,6 +168,7 @@ if($result){
     }
 }   
     echo "</script>";
+    // echo $req_amnt;
 ?>
          <div class="row" align="center">
     <div class="col-lg-6 col-sm-12">
@@ -182,7 +183,7 @@ if($result){
                                 $sum += $row["amount"];
                             }
                         }
-                    
+                        // echo $sum;
                         $req_amnt = $req_amnt - $sum;
                         if($req_amnt < 0)
                             $req_amnt = 0;
@@ -207,7 +208,7 @@ if($result){
     <script>
         function newCheck(){
             var x = document.getElementsByTagName('input')
-            var req = 100;
+            var req = 0;
             for(var i=0;i<x.length;i++){
                 if(x[i].checked){
                     req += parseInt(x[i].value)
@@ -223,6 +224,13 @@ if($result){
 <div class="row" align="center">
     <h4 style="color:red; font-weight: bold" id="req"> ONLY CAPTAIN NEED TO REGISTER FOR TEAM EVENTS</h4>
 </div>
+<div align="center" style="font-size:12px">WEBAPP DEVELOPED BY 
+<a href="http://developersworkofficial.tk" target="_blank" style="font-size:15px;text-decoration:none;color:cyan;"><b> 
+Developers@Work <b></a> & 
+<a href="http://redants.info" target="_blank" style="font-size:15px;text-decoration:none;color:red;"><b> 
+Redants Team <b></a>
+</div>
+
      <!-- <marquee behavior="alternate" style="color:red;font-size:12px">Payment will not be refunded once done...</marquee> -->
 </body>
 </html>

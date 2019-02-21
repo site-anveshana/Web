@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
 	include_once("db_operations.php");
 	$dbobj = new DBConnect;
@@ -13,12 +14,10 @@
         if(strtoupper($row['username']) == $_POST['htno'])
             // if((int)$row['role_id'] > (int)$_POST['role_id']){
                 $result = $dbobj->update('anveshana_users',"role_id",$_POST['role_id'],"username",'"'.$_POST['htno'].'"');
-                if(isset($_POST['reset_pwd']))
+                if(isset($_POST['reset_pwd'])){
                     $result = $dbobj->update('anveshana_users',"password","'a48baea16e7e1194826a8a2366f84e6f'","username",'"'.$_POST['htno'].'"');
-                    if($result)
-                    echo '<script>alert("Role Updation Successful");</script>';
-                    else
-                echo '<script>alert("Role Updation Failed");</script>';
+                }if(!$result)
+                        echo '<script>alert("ROLE UPDATION FAILED");</script>';
             // }
             // else
             //     echo '<script>alert("Higher roles cannot be decreased");</script>';
@@ -26,10 +25,9 @@
         else{
             $result = $dbobj->insert('anveshana_users',"(username,role_id)",'("'.$_POST['htno'].'",'.$_POST['role_id'].')');
 
-            if($result)
-                echo '<script>alert("Role Updation Successful");</script>';
-            else
-                echo '<script>alert("Role Updation Failed");</script>';
+            if(!$result)
+                // echo '<script>alert("Role Updation Successful");</script>';
+                echo '<script>alert("ROLE UPDATION FAILED");</script>';
         }
 
         $helper = array_keys($_SESSION);

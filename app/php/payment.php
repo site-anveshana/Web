@@ -70,7 +70,13 @@
 	}
 	// die();
     
-    $result1 = $dbc->search('anveshana_participants','*',"HTNO","'".$htno."'");
+	$result1 = $dbc->search('anveshana_participants','*',"HTNO","'".$htno."'");
+	if(!$result1){
+		$dbc->delete("anveshana_registration","HTNO","'".$htno."'");
+		echo "<script>alert('Reg.No NOT FOUND')</script>";
+		header("refresh:0;url=../payment.php");
+		die();
+	}
     $row1 = $result1->fetch_assoc();
     $username = "sasicollege";
 	$password = "SITE2002";

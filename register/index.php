@@ -180,5 +180,12 @@
 </form>
 </div>
 
+
+<div align="center" style="font-size:12px">WEBAPP DEVELOPED BY 
+<a href="http://developersworkofficial.tk" target="_blank" style="font-size:15px;text-decoration:none;color:cyan;"><b> 
+Developers@Work <b></a> & 
+<a href="http://redants.info" target="_blank" style="font-size:15px;text-decoration:none;color:red;"><b> 
+Redants Team <b></a>
+</div>
 </body>
 </html>

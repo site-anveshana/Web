@@ -118,6 +118,10 @@
 			<tr align="right">
 				<td colspan="3" height="50px" > Signature of <?php echo $_SESSION['anveshana_username']; ?></td>
 			</tr>
+
+			<tr align="center">
+				<td colspan="3" height="50px" >--> NO REFUND <--</td>
+			</tr>
 </table>	
 
 
@@ -138,8 +142,10 @@
 								<script>
 								
 									window.print();
+
 									setTimeout(function(){
-										window.top.location="payment.php";
+										window.print();
+										setTimeout(function(){window.top.location="payment.php"},500);
 									},500);
 								</script>
 

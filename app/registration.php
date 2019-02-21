@@ -82,6 +82,11 @@
             $dept = $row["DEPARTMENT"];
         }
     }
+    else{
+        echo "<script>alert('Reg.No NOT FOUND');window.top.location='payment.php'</script>";
+		
+		die();
+    }
 
     //query
     $result = $dbobj->search('anveshana_events','*',1,1);
@@ -110,7 +115,7 @@
 
             // $event_details .= '<tr><td><input type="checkbox" name='.$row['event_id'].' id="" value='.$row['event_id'].' >'.$row['event_name'].'</td></tr>';
         }
-
+        
         $result = $dbobj->search('anveshana_registration','*',"HTNO","'".$htno."'");
         $req_amnt = 0;
         if($result){
@@ -124,6 +129,7 @@
                 echo "}";
             }
         }
+        echo "document.getElementById('0').checked = true;//document.getElementById('0').disabled = true;";
         echo "</script>";
     }
 
@@ -170,7 +176,7 @@
     <script>
         function newCheck(){
             var x = document.getElementsByTagName('input')
-            var req = 100;
+            var req = 0;
             for(var i=0;i<x.length;i++){
                 if(x[i].checked){
                     req += parseInt(x[i].value)
