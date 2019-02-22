@@ -49,6 +49,20 @@
 				echo "<h1>NO DATA FOUND</h1>";
 				die();
 			}
+			else if(!$_GET["clg"] && !$_GET["dept"]){
+				if($resu){
+				while($r = $resu->fetch_assoc()){
+					$res = $dbobj->search('anveshana_participants',"*","HTNO","'".$r["HTNO"]."'");
+					if(!$res)continue;
+					$row = $res->fetch_assoc();
+					echo "<tr>";
+											echo "<td>".$row["HTNO"]."</td>";
+											echo "<td>".$row["FIRSTNAME"]." ".$row["LASTNAME"]."</td>";
+											echo "<td>".$row["MOBILE"]."</td>";
+											echo "</tr>";
+				}}else{echo "<h1>NO DATA FOUND</h1>";}
+				die();
+			}
 		}
 		if(!$resu)
 			$resu = $dbobj->search('anveshana_registration',"DISTINCT HTNO","status",1);
