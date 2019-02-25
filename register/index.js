@@ -80,27 +80,29 @@ function change() // courses events
     else
     {
       // MBA selected
+       var MS = document.getElementById("dept");
+        for(var i=0;i<arr3.length;i++)
+        {
+          var option = document.createElement("OPTION");
+          txt= document.createTextNode(arr3[i]);
+          option.appendChild(txt);
+          option.value = arr3[i];
+          //OPTION.setAttribute("value",arr[i]);
+          MS.insertBefore(option,MS.lastChild);
+        }
+        
       var select = document.getElementById("select");
        for(var i=0;i<3;i++)
         {
           var option = document.createElement("OPTION"),
           txt= document.createTextNode(arr1[i]);
           option.appendChild(txt);
-          option2.value = arr1[i];
+          option.value = arr1[i];
           //OPTION.setAttribute("value",arr[i]);
           select.insertBefore(option,select.lastChild);
         }
         //years
-        var MS = document.getElementById("dept");
-        for(var i=0;i<arr3.length;i++)
-        {
-          var option = document.createElement("OPTION");
-          txt= document.createTextNode(arr3[i]);
-          option.appendChild(txt);
-          option2.value = arr3[i];
-          //OPTION.setAttribute("value",arr[i]);
-          MS.insertBefore(option,MS.lastChild);
-        }
+       
 		      
           //Add  MS events by clicking on MS radio button
 		    document.getElementById('d1').innerHTML='<table id="MSevnts"> <tr> <td colspan="3"><h4 style="color:red; font-weight: bold">MS Events </h4></td></tr> <tr>    <td><input type="checkbox" name="ev26" id="" value="Young Manager" >Young Manager</td>    <td><input type="checkbox" name="ev27"  value="B-Quiz" >B-Quiz</td>	  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>    <tr>       <td><input type="checkbox" name="ev28" id=""   value="B-Plan" >B-Plan</td>	    <td><input type="checkbox" name="ev29" id="" value="Stock Game" >Stock game</td>        <td><input type="checkbox" name="ev30"  id="" value="Ad-Selfie" >Ad-Selfie</td>    </tr></table>';

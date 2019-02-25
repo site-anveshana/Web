@@ -87,6 +87,8 @@
 		
 		die();
     }
+    if($dept == "DCME" || $dept == "DECE" || $dept == "DEEE"|| $dept ==  "DME"|| $dept ==  "DCE")
+$dept = "DIPLOMA";
 
     //query
     $result = $dbobj->search('anveshana_events','*',1,1);

@@ -43,7 +43,7 @@
     if($result){
         while($row = $result->fetch_assoc())
             if($row["event_id"] != 0)
-            echo '<option value="'.$row['event_id'].'">'.$row['event_name'].' --> '.$row['event_type'].'</option>';
+            echo '<option value="'.$row['event_id'].'">'.$row['event_name'].' -- '.$row['event_type'].'</option>';
     }
 ?>
 

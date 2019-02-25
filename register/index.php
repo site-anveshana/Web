@@ -29,9 +29,9 @@
 <!-- Latest compiled JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
-	<script type="text/javascript" src="validate.js?3.0"></script>
+	<script type="text/javascript" src="validate.js?4.0"></script>
 	<link rel="stylesheet" href="index.css">
-	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="index.js?1.0"></script>
 
 </head>
 <body>
@@ -109,7 +109,7 @@
               <div class="col-md-4    selectContainer">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                  <select id="dept" name="department"  onclick = "dept_selection()" class="form-control selectpicker" required></select>
+                  <select id="dept" name="department"  onclick = "dept_selection()" class="form-control selectpicker"></select>
                 </div>
               </div>
           </div>
@@ -120,7 +120,7 @@
               <div class="col-md-4    selectContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                    <select id="select" name="year" class="form-control selectpicker" required></select>
+                    <select id="select" name="year" class="form-control selectpicker" ></select>
                 </div>
               </div>
             </div>

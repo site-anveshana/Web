@@ -73,6 +73,8 @@ if(!isset($_SESSION['dept']) || !isset($_SESSION['htno'])){
     die();
 }
 $dept = $_SESSION['dept'];
+if($dept == "DCME" || $dept == "DECE" || $dept == "DEEE"|| $dept ==  "DME"|| $dept ==  "DCE")
+$dept = "DIPLOMA";
 $htno = $_SESSION['htno'];
 
 include_once 'db_operations.php';

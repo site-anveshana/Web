@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>.::Form::.</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style type="text/css">
+  .form-control{
+    background-color: transparent;
+  }
+/*  input, select, textarea{
+    color: #ffffff;
+}
+
+textarea:focus, input:focus {
+    color: #ffffff;
+}*/
+
+</style>
+  <script type="text/javascript">
+
+ function showfield(name){
+  if(name=='Other')document.getElementById('div1').innerHTML='<div class="form-group"><label class="col-md-0 col-sm-0 col-xs-0 control-label"></label>             <div class="col-md-12 inputGroupContainer"> <br/><div class="input-group"><span class="input-group-addon"><i class="fa fa-institution"></i></span> <input  placeholder="Enter Your College Name Here" class="form-control"  type="text"></div> </div></div>';
+  else document.getElementById('div1').innerHTML='';
+}
+ function validate()
+{
+
+
+  if (document.form1.dept.value=="Select your Department")
+  {
+      alert("select department");
+      return false;
+  }
+  if (document.form1.mobile.value.length!=10)
+  {
+      alert("enter valid mobile number");
+      return false;
+  }
+  if(document.form1.ev.value=="" && document.form1.ev1.value=="" && document.form1.ev2.value=="")
+  {
+    alert("please select any one event")
+    return false;
+  }
+}
+         
+   
+
+  </script>
+
+</head>
+<body  >
+  
+ <div class="container-fluid" >
+ 
+
+    <form class="  well form-horizontal" style="background:url(img/r.jpg);" name="form1" action="control.php" method="post"  id="contact_form" onsubmit="return validate()">
+<fieldset >
+
+<!-- Form Name -->
+<legend><center><h2><b>Event Registration</b></h2></center></legend>
+<marquee><span style="color:red;font-size: 15px;"> *****Student should carry their college ID cards during the events  *****</span></marquee>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4  control-label">Hallticket Number<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>  
+  <div class="col-md-4  col-sm-4 col-xs-4  inputGroupContainer">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+    <input  name="htno" placeholder="Hallticket Number" class="form-control"  type="text"  required>
+  </div>
+  </div>
+</div>
+
+
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label">First Name<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>  
+  <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="fname" placeholder="First Name" class="form-control"  type="text" required>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label" >Last Name<sub style="color: red; font-size:20px;">&nbsp;*</sub></label> 
+    <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="lname" placeholder="Last Name" class="form-control"  type="text" required>
+    </div>
+  </div>
+</div>
+
+
+<!-- Radio input-->
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label" >Gender<sub style="color: red; font-size:20px;">&nbsp;*</sub></label> 
+    <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+    <div class="input-group" >
+      <input type="radio" name="gender" value="male" required>&nbsp;Male&nbsp;
+      <input  type="radio" name="gender" value="female" >&nbsp;Female&nbsp; 
+       
+      </div>
+    </div>
+    </div>
+     
+    
+  
+
+
+
+<!-- Radio input-->
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label" >Course<sub style="color: red; font-size:20px;">&nbsp;*</sub></label> 
+    <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+        <div class="input-group">
+      <input type="radio" name="courses"  value="B.Tech" id="rd" onclick="change()" required> B.Tech/ B.E &nbsp;
+      <input  type="radio" name="courses" value="Diploma" id="rd1"onclick="change()" > Diploma&nbsp; 
+      <input  type="radio" name="courses" value="MBA" id="rd2" onclick="change()"> MBA&nbsp; 
+    </div>
+  </div>
+</div>
+
+
+<!-- Select input-->
+  <div class="form-group" > 
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label">Department<sub style="color: red; font-size:20px;">&nbsp;*</sub> </label>
+    <div class="col-md-4  col-sm-4 col-xs-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select id="dept" name="department" class="form-control selectpicker">
+      <!--<option>Select your Department</option>
+      <option value="CSE">CSE</option>
+      <option value="IT">IT</option>
+       <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+         <option value="ME">ME</option>
+          <option value="CE">CE</option>
+          <option value="PE">PE</option>-->
+
+     
+    </select>
+  </div>
+</div>
+</div>
+
+<!--select input-->
+<div class="form-group"> 
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label"> Year<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>
+    <div class="col-md-4  col-sm-4 col-xs-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select id="select" class="form-control selectpicker" >
+     
+     </select>
+  </div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+  function change()
+  {
+    var rd=document.getElementById("rd");
+    document.getElementById("select").options.length=0;
+     document.getElementById("dept").options.length=0;
+
+        arr1 = ["Select","I","II","III","IV"];
+        arr=["Select Your Department","CSE","IT","ECE","EEE","ME","CE","PE"];
+        arr2=["Select Your Department","DCME","DECE","DEEE","DME","DCE"];
+        arr3=["MBA"]
+    if(rd.checked)
+    {
+    var select = document.getElementById("dept");
+    
+        for(var i=0;i<arr.length;i++)
+        {
+          var option = document.createElement("OPTION");
+          txt= document.createTextNode(arr[i]);
+          option.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          select.insertBefore(option,select.lastChild);
+        }
+
+        var select1 = document.getElementById("select");
+        
+        for(var i=0;i<arr1.length;i++)
+        {
+          var option1 = document.createElement("OPTION");
+          txt= document.createTextNode(arr1[i]);
+          option1.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          select1.insertBefore(option1,select1.lastChild);
+        }
+    }
+    else if(rd1.checked)
+    {
+    
+    var select = document.getElementById("select");
+
+    
+        for(var i=0;i<4;i++)
+        {
+          var option = document.createElement("OPTION"),
+          txt= document.createTextNode(arr1[i]);
+          option.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          select.insertBefore(option,select.lastChild);
+        }
+        var dept = document.getElementById("dept");
+    
+        for(var i=0;i<arr2.length;i++)
+        {
+          var option2 = document.createElement("OPTION");
+          txt= document.createTextNode(arr2[i]);
+          option2.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          dept.insertBefore(option2,dept.lastChild);
+        }
+    }
+    else
+    {
+      
+
+    var select = document.getElementById("select");
+  
+    
+        for(var i=0;i<3;i++)
+        {
+          var option = document.createElement("OPTION"),
+          txt= document.createTextNode(arr1[i]);
+          option.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          select.insertBefore(option,select.lastChild);
+        }
+        var mba = document.getElementById("dept");
+    
+        for(var i=0;i<arr3.length;i++)
+        {
+          var option = document.createElement("OPTION");
+          txt= document.createTextNode(arr3[i]);
+          option.appendChild(txt);
+          //OPTION.setAttribute("value",arr[i]);
+          mba.insertBefore(option,mba.lastChild);
+        }
+    }
+
+    
+  }
+
+
+  </script>
+
+
+
+<!--select input-->
+<div class="form-group"> 
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label">College<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>
+    <div class="col-md-4  col-sm-4 col-xs-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+    <select name="college" class="form-control selectpicker" onchange="showfield(this.options[this.selectedIndex].value)">
+<option value="">Select Your College</option>
+<option value="AKRG College of Engineering and Technology"> AKRG College of Engineering &amp; Technology</option>	
+<option value="Akula Gopayya College of Engineering and Technology ">	Akula Gopayya College of Engineering and Technology </option>
+<option value="Akula Sriramulu College of Engineering">	Akula Sriramulu College of Engineering	</option>
+<option value="Best group of Institutions">	Best group of Institutions	</option>
+<option value="Bhimavaram Institute of Engineering and Technology">	Bhimavaram Institute of Engineering &amp; Technology	</option>
+<option value="Chaitanya Engineering College  ">	Chaitanya Engineering College	</option>
+
+<option value="DNR College Of Engineering and Technology">	DNR College Of Engineering And Technology	</option>
+
+<option value="Eluru College of Engineering and Technology">	Eluru College of Engineering &amp;Technology	</option>
+
+<option value="Gayatri Institute of Engineering and Technology">	Gayatri Institute of Engineering &amp; Technology</option>	
+
+<option value="Grandhi Varalakshmi Venkatarao Institute of Technology">	Grandhi Varalakshmi Venkatarao Institute of Technology	</option>
+
+<option value="Helapuri Institute of Technology and Science">	Helapuri Institute of Technology &amp; Science	</option>
+
+<option value="Jogaiah Institute of Technology and Science">	Jogaiah Institute of Technology and Science	</option>
+
+<option value=" Mentey Padmanabham College of Engineering and Technology">	Mentey Padmanabham College of Engineering &amp; Technology	</option>
+
+<option value="Narasapur Institute of Technology">	Narasapur Institute of Technology	</option>
+
+<option value=" Nova College of Engineering and Technology (Jangareddygudam)">	Nova College of Engineering &amp; Technology (Jangareddygudam)</option>	
+
+<option value="Nova's Institute of Technology Research ( Eluru )">	Nova's Institute of Technology Research ( Eluru )	</option>
+
+<option value="Ramachandra College of Engineering">	Ramachandra College of Engineering	</option>
+
+<option value="Sagi Ramakrishna Raju (SRKR) Engineering College">	Sagi Ramakrishna Raju (SRKR) Engineering College	</option>
+
+<option value="Sasi Institute of Technology and Engineering">	Sasi Institute of Technology &amp; Engineering	</option>
+
+<option value="Shri Vishnu Engineering College for Women">	Shri Vishnu Engineering College for Women	</option>
+
+<option value=  Sir CR Reddy College of Engineering "">	Sir CR Reddy College of Engineering	</option>
+
+<option value="Sree Ramulu Institute of Technology">	Sree Ramulu Institute of Technology</option>
+
+<option value="Sri Vasavi Engineering College<">	Sri Vasavi Engineering College</option>
+
+<option value="Sri Vasavi Institute of Engineering andTechnology">	Sri Vasavi Institute of Engineering &amp;Technology</option>
+
+<option value="Sri Vatsavi Krishnam Raju College of Engineering and Technology">	Sri Vatsavi Krishnam Raju College of Engineering &amp; Technology</option>
+
+<option value="Sri Venkateswara Institute of Science and Information Technology">	Sri Venkateswara Institute of Science &amp; Information Technology</option> 
+
+<option value="Swarnandhra College of Engineering and Technology">	Swarnandhra College of Engineering &amp;Technology</option>
+
+<option value="Swarnandhra Instt. of Engineering and Technology">	Swarnandhra Instt. of Engineering&amp; Technology</option>
+
+<option value="Vijetha Institute of Technology and Science">	Vijetha Institute of Technology &amp; Science</option>
+
+<option value="Vishnu Institute of Technology">	Vishnu Institute of Technology</option>
+
+<option value="West Godavari Institute of Science and Engineering">	West Godavari Institute of Science &amp; Engineering</option>
+
+<option value="Other">Other</option>
+     
+    </select>
+  </div>
+  <div id="div1"></div>
+</div> 
+</div>
+  
+
+<!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label">E-Mail<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>  
+    <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email">
+    </div>
+  </div>
+</div>
+
+
+<!-- Text input-->       
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label">Contact No.<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>  
+    <div class="col-md-4  col-sm-4 col-xs-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+  <input name="mobile" placeholder="(+91)" class="form-control" id="phno" type="number" required>
+    </div>
+    <dir id="mb"></dir>
+  </div>
+</div>
+
+
+
+<div class="form-group"> 
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label"> Events<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>
+ <div class="container">         
+ <div class="input-group">   
+    <table >
+       <tbody align="left">
+      <tr>
+         <p>Please select any one of it events</p>
+        <td>
+
+          <input type="radio" name="ev" id="" value="Paper Presentation" >Paper Presentation&nbsp;&nbsp;</td>
+          <td><input type="radio" name="ev" id="" value="ShortFilm">ShortFilm
+        </td>
+      </tr>
+       <tr>
+        <td>
+          <input type="radio" name="ev1" id="" value="Project Expo" >Project Expo&nbsp;&nbsp;</td><td>
+          <input type="radio" name="ev1" id="" value="Coding contest(CSE,IT,ECE,EEE)">Coding contest&nbsp;&nbsp;</td><td>
+           <input type="radio" name="ev1" id="" value="CAD(ME,CE)">CAD&nbsp;&nbsp;
+        </td>
+        </tr>
+        <tr>
+        <td>
+          </td><td>
+          (CSE,IT,ECE,EEE)&nbsp;&nbsp;</td><td>
+           (ME,CE)&nbsp;&nbsp;
+        </td>
+      </tr>
+      </tr>
+       <tr>
+        <td>
+          <input type="radio" name="ev2" id="" value="Quiz">Quiz
+        </td>
+    </table>
+  </div>
+</div>
+</div>
+<!-- Select input 
+<div class="form-group"> 
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label"> Events<sub style="color: red; font-size:20px;">&nbsp;*</sub></label>
+    <div class="col-md-4  col-sm-4 col-xs-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select  id="event" name="events"class="form-control selectpicker">
+      <option value="">Select Events</option>
+      
+<option value="Paper Presentation"> Paper Presentation</option>
+      
+<option value="Poster Presentation"> Poster Presentation</option>
+      
+<option value="Project Expo"> Project Expo</option>
+      
+<option value=" CAD">CAD(ME,CE)</option>
+<option value=" Coding"> Coding Contest</option>
+<option value=" ShortFilm"> ShortFilm Contest</option>
+<option value=" Quiz"> Quiz</option>
+    </select>
+  </div>
+</div>
+</div>-->
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4  col-sm-4 col-xs-4 control-label"></label>
+  <div class="col-md-4  col-sm-4 col-xs-4"><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-warning" >  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    REGISTER  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+  </div>
+</div>
+
+
+
+</fieldset>
+</form>
+</div>
+    </div><!-- /.container -->
+</body>
+</html>

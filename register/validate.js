@@ -22,13 +22,13 @@ function validate(){
     alert('Invalid Last Name')
     return false;
   }
-
+if(form1["courses"] != "MS")
   if (document.form1.dept.value=="")
   {
       alert("Please Select Department");
       return false;
   }
-
+if(form1["courses"] != "MS")
   if(document.form1.year.value == ''){
     alert("Please Select Year")
     return false

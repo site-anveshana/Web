@@ -10,7 +10,7 @@
     else
         $result = $dbobj->search('anveshana_events',"*","event_name",'upper("'.$_POST['event_name'].'") and event_type like upper("'.$_POST['event_type'].'")');
 
-    if(!$result || $result->num_rows < 1){
+    if($result){
         // $row = $result->fetch_assoc();
         // if(strtoupper($row['username']) == $_POST['htno']){
         //     if($row['role_id'] < $_POST['role_id'])

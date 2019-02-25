@@ -1,0 +1,70 @@
+event_id,event_name,event_type,event_cost
+0,Registration,minpay,100
+1,Treasure Hunt,Common,100
+2,Crazy Rocket,Common,100
+3,Quick Sand,Common,100
+4,Mr.Power,Common,100
+5,RC Foot Ball,Common,100
+6,F2,Common,100
+7,Video & Song Dedication,Common,100
+8,Selfie Contest,Common,100
+9,Miss Vigor,Common,100
+10,Sos,Common,100
+11,Blindfold,Common,100
+12,Dance,Cultural,900
+13,Singing,Cultural,900
+14,Ramp Walk,Cultural,900
+15,Photography,Cultural,900
+16,Craft Fair,Cultural,900
+17,Creative Writing,Cultural,900
+18,I got Talent,Cultural,900
+19,Short Film,Cultural,900
+20,Paper Presentation,CE,100
+21,Poster Presentation,CE,100
+22,Project Expo,CE,100
+23,Technical Quiz,CE,100
+24,Idea Bucket,CE,100
+25,CAD RAW,CE,100
+26,Tall Structures,CE,100
+27,Spot Event (Brick Masonry),CE,100
+28,Paper Presentation,EEE,100
+29,Poster Presentation,EEE,100
+30,Project Expo,EEE,100
+31,Technical Quiz,EEE,100
+32,Technical Puzzle,EEE,100
+33,Idea Bucket,EEE,100
+34,Paper Presentation,ME,100
+35,Poster Presentation,ME,100
+36,Project Expo,ME,100
+37,Technical Quiz,ME,100
+38,Idea Bucket,ME,100
+39,CAD Contest,ME,100
+40,Machino,ME,100
+41,Lathe Master,ME,100
+42,Paper Presentation,ECE,100
+43,Poster Presentation,ECE,100
+44,Project Expo,ECE,100
+45,Technical Quiz,ECE,100
+46,Idea Bucket,ECE,100
+47,Coding Contest,ECE,100
+48,Circuit-Mania,ECE,100
+49,E-Cubic,ECE,100
+50,Paper Presentation,CSE,100
+51,Poster Presentation,CSE,100
+52,Project Expo,CSE,100
+53,Technical Quiz,CSE,100
+54,Idea Bucket,CSE,100
+55,Debugging Contest,CSE,100
+56,Coding Contest,CSE,100
+57,Paper Presentation,IT,100
+58,Poster Presentation,IT,100
+59,Project Expo,IT,100
+60,Technical Quiz,IT,100
+61,Idea Bucket,IT,100
+62,Coding Contest,IT,100
+63,Young Manager,MS,100
+64,Stock Game,MS,100
+65,Business Quiz,MS,100
+66,Business Plan,MS,100
+67,Ad-Making,MS,100
+,,,
